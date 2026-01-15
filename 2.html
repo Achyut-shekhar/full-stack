@@ -1,17 +1,65 @@
 <!DOCTYPE html>
-<html >
-<head>
-
-  <title>Document</title>
-</head>
-<body>
-  <p>First name: <input type="text"> </p>
-  <p>Last name: <input type="text"></p>
-  <p>Gender: <input type="checkbox" name="" id=""> Male <input type="checkbox" name="" id=""> Female</p>
-  <p>Email: <input type="text"></p>
-   <p>Date of birth <input type="date" name="" id=""></p>
-    <p>Address</p>
-       <textarea name="" id="" cols="30" rows="10"></textarea>
-    
-</body>
+<html>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="myForm" onsubmit="displaydata();return false">
+      <label for="">First name</label>
+      <input type="text" id="firstname" /><br /><br />
+      <label for="">Last name</label>
+      <input type="text" id="lastname" /><br /><br />
+      <label for="">Gender:</label>
+      <input type="radio" name="gender" value="Male" />Male
+      <input type="radio" name="gender" value="Female" />Female <br /><br />
+      <label for="">Email:</label>
+      <input type="email" id="email" /><br /><br />
+      <label for="">Date of Birth:</label>
+      <input type="date" id="dob" /><br /><br />
+      <label for="">Address:</label><br />
+      <textarea id="address" rows="4" cols="40"></textarea><br /><br />
+      <input type="submit" onclick="submit" />
+      <hr />
+      <h3>Entered Information</h3>
+      <div id="output"></div>
+      <script>
+        function displaydata() {
+          var frname = document.getElementById("firstname").value;
+          var lrname = document.getElementById("lastname").value;
+          var email = document.getElementById("email").value;
+          var dob = document.getElementById("dob").value;
+          var address = document.getElementById("address").value;
+          //to get the value of selected radio button
+          var gender = "";
+          var genders = document.getElementsByName("gender");
+          //loop to check which radio button is selected
+          for (var i = 0; i < genders.length; i++) {
+            if (genders[i].checked) {
+              gender = genders[i].value;
+            }
+          }
+          //innerHTML use to display the output without refreshing the page
+          document.getElementById("output").innerHTML =
+            "<p><b>First Name:</b> " +
+            frname +
+            "</p>" +
+            "<p><b>Last Name:</b> " +
+            lrname +
+            "</p>" +
+            "<p><b>Gender:</b> " +
+            gender +
+            "</p>" +
+            "<p><b>Date of Birth:</b> " +
+            dob +
+            "</p>" +
+            "<p><b>Email:</b> " +
+            email +
+            "</p>" +
+            "<p><b>Address:</b> " +
+            address +
+            "</p>";
+        }
+      </script>
+    </form>
+  </body>
 </html>

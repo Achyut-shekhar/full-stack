@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Example</title>
+</head>
+<body>
+  <h2>Select Your Course</h2>
+  <form onsubmit="showCourse(); return false">
+     <label for="course">Course:</label>
+     <select name="" id="course">
+       <option value="">---Select Course---</option>
+       <option value="B.tech">B.tech</option>
+       <option value="M.tech">M.tech</option>
+       <option value="BCA">BCA</option>
+       <option value="MCA">MCA</option>
+
+     </select><br><br>
+     <input type="submit" value="Submit">
+      </form>
+      <h3>Entered Information</h3>
+      <div id="output"></div>
+      <script>
+        function showCourse() {
+          var course = document.getElementById("course").value;
+          if (course === "") {
+            document.getElementById("output").innerHTML =
+              "<p><b>Please select a course.</b></p>";
+            return;
+          }else {
+          document.getElementById("output").innerHTML =
+            "<p><b>Selected Course:</b>" + course + "</p>";
+          }
+        }
+      </script>
+
+ 
+  
+</body>
+</html>

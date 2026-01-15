@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Check box example</title>
+  </head>
+  <body>
+    <h2>Select Your Skills</h2>
+    <form id="myForm" onsubmit="showSkills();return false">
+      <input type="checkbox" name="skill" value="HTML">HTML<br>
+      <input type="checkbox" name="skill" value="CSS">CSS<br>
+      <input type="checkbox" name="skill" value="JavaScript">JavaScript<br>
+      <input type="checkbox" name="skill" value="Python">Python<br><br>
+      <input type="submit" value="Submit">
+
+    </form>
+      <h3>Entered Information</h3>
+      <div id="output"></div>
+      <script>
+        function showSkills() {
+          var selectedSkills = [];
+          var skills = document.getElementsByName("skill");
+          //push used to add the selected checkbox values to the array
+          for (var i = 0; i < skills.length; i++) {
+            if (skills[i].checked) {
+              selectedSkills.push(skills[i].value);
+            }
+          }
+         //join used to convert array to string with comma separation
+         // === it is used to check the condition without type conversion
+         // == it is used to check the condition with type conversion
+          if(selectedSkills.length === 0) {
+            document.getElementById("output").innerHTML = 
+              "<p><b>No skills selected.</b></p>";
+          } else {
+            document.getElementById("output").innerHTML =
+             "<p><b>Selected Skills:</b>" + selectedSkills.join(", ") + "</p>";
+          }
+        }
+      </script>
+  </body>
+</html>
