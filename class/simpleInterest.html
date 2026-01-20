@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Simple Interest</title>
+  </head>
+  <body>
+    <h2>Simple Interest Calculator</h2>
+    <form >
+      <p>Principal: <input type="number" id="principal" /></p>
+      <p>Rate: <input type="number" id="rate" /></p>
+      <p>Time: <input type="number" id="time" /></p>
+      <button type="button" onclick="calculate()">Calculate</button>
+
+      <p id="result"></p>
+    </form>
+    <script>
+      function calculate() {
+        var p = document.getElementById("principal").value;
+        var r = document.getElementById("rate").value;
+        var t = document.getElementById("time").value;
+if(p=="" || r=="" || t==""){
+  alert("Please fill all the fields");
+  return;
+}
+        var si = (p * r * t) / 100;
+
+        document.getElementById
+        document.getElementById("result").innerHTML = "Simple Interest = " + si;
+      }
+    </script>
+  </body>
+</html>
