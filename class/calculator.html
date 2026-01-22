@@ -15,37 +15,40 @@
       <td><button type="button" onclick="pressKey('9')">9</button></td>
       <td><button type="button" onclick="pressKey('/')">/</button></td>
     </tr>
-   <tr>
-    <td><button type="button" onclick="pressKey('4')">4</button></td>
-    <td><button type="button" onclick="pressKey('5')">5</button></td>
-    <td><button type="button" onclick="pressKey('6')">6</button></td>
-    <td><button type="button" onclick="pressKey('*')">*</button></td>
-   </tr>
-   <tr> 
-    <td><button type="button" onclick="pressKey('1')">1</button></td>
-    <td><button type="button" onclick="pressKey('2')">2</button></td>
-    <td><button type="button" onclick="pressKey('3')">3</button></td>
-    <td><button type="button" onclick="pressKey('-')">-</button></td>
-   </tr>
-   <tr> 
-    <td><button type="button" onclick="pressKey('0')">0</button></td>
-    <td><button type="button" onclick="pressKey('C')">C</button></td>
-    <td><button type="button" onclick="pressKey('=')">=</button></td>
-    <td><button type="button" onclick="pressKey('+')">+</button></td> 
-   </tr>
+    <tr>
+      <td><button type="button" onclick="pressKey('4')">4</button></td>
+      <td><button type="button" onclick="pressKey('5')">5</button></td>
+      <td><button type="button" onclick="pressKey('6')">6</button></td>
+      <td><button type="button" onclick="pressKey('*')">*</button></td>
+    </tr>
+    <tr>
+      <td><button type="button" onclick="pressKey('1')">1</button></td>
+      <td><button type="button" onclick="pressKey('2')">2</button></td>
+      <td><button type="button" onclick="pressKey('3')">3</button></td>
+      <td><button type="button" onclick="pressKey('-')">-</button></td>
+    </tr>
+    <tr>
+      <td><button type="button" onclick="pressKey('0')">0</button></td>
+      <td><button type="button" onclick="pressKey('C')">C</button></td>
+      <td><button type="button" onclick="pressKey('=')">=</button></td>
+      <td><button type="button" onclick="pressKey('+')">+</button></td>
+    </tr>
   </table>
 
-
-   <script>
+  <script>
     function pressKey(key) {
-      document.getElementById("display").value += key;
+      var display = document.getElementById("display");
+      if (key === "C") {
+        display.value = "";
+      } else if (key === "=") {
+        try {
+          display.value = eval(display.value);
+        } catch (e) {
+          display.value = "Error";
+        }
+      } else {
+        display.value += key;
+      }
     }
-    function calculate() {
-      var display = document.getElementById("display").value;
-      var result = eval(display);
-      document.getElementById("display").value = result;
-    }
-   </script>
-   
-    
+  </script>
 </body>

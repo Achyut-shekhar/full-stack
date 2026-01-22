@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>calculator</h2>
+    <p>input the first number</p>
+    <input type="number" id="first" />
+    <p>Second number</p>
+    <input type="number" id="second" /><br /><br />
+    <button onclick="add()">Add</button>
+    <button onclick="subtract()">Subtract</button>
+    <button onclick="multiply()">Multiply</button>
+    <button onclick="divide()">Divide</button>
+    <h3>Result:</h3>
+    <p id="result"></p>
+    <script>
+      function add() {
+
+        var first = document.getElementById("first").value;
+        var second = document.getElementById("second").value;
+        ifirst === "" || second === "") {
+          document.getElementById("result").innerHTML =
+            "Error: Please enter both numbers";
+          return;
+        }
+        var result = parseInt(first) + parseInt(second);
+        document.getElementById("result").innerHTML = result;
+      }
+      function subtract() {
+        var first = document.getElementById("first").value;
+        var second = document.getElementById("second").value;
+        if (first === "" || second === "") {
+          document.getElementById("result").innerHTML =
+            "Error: Please enter both numbers";
+          return;
+        }
+        var result = first - second;
+        document.getElementById("result").innerHTML = result;
+      }
+      function multiply() {
+        var first = document.getElementById("first").value;
+        var second = document.getElementById("second").value;
+        if (first === "" || second === "") {
+          document.getElementById("result").innerHTML =
+            "Error: Please enter both numbers";
+          return;
+        }
+        var result = first * second;
+        document.getElementById("result").innerHTML = result;
+      }
+      function divide() {
+        var first = document.getElementById("first").value;
+        var second = document.getElementById("second").value;
+        if (first ==="" || second === "") {
+          document.getElementById("result").innerHTML =
+            "Error: Please enter both numbers";
+          return;
+        }
+        if (second == 0) {
+          document.getElementById("result").innerHTML =
+            "Error: Division by zero";
+          return;
+        }
+        var result = first / second;
+        document.getElementById("result").innerHTML = result;
+      }
+    </script>
+  </body>
+</html>
