@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+      padding: 10px;
+    }
+    h2 {
+      text-align: center;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    
+    }
+    input[type="text"] {
+      display: block;
+      margin: 10px auto;
+      padding: 8px;
+      width: 200px;
+      font-size: 14px;
+    }
+    h3 {
+      text-align: center;
+    }
+  </style>
+  <body>
+    <form action="">
+      <h2>Google Redirecting</h2>
+      <button type="button" onclick="redirectToGoogle()">Go to google</button>
+      <h3>URL Redirecting</h3>
+      <input type="text" id="url" placeholder="Enter site name " />
+      <button type="button" onclick="redirectToUrl()">Go to url</button>
+
+      <script>
+        function redirectToGoogle() {
+          window.location.href = "https://www.google.com";
+        }
+
+        function redirectToUrl() {
+          var locate = document.getElementById("url").value;
+          if (locate) {
+            window.location.href = `https://www.${locate}.com`;
+          } else {
+            alert("Please enter a site name");
+          }
+        }
+
+        document
+          .getElementById("url")
+          .addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              redirectToUrl();
+            }
+          });
+      </script>
+    </form>
+  </body>
+</html>
