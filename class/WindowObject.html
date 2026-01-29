@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Window Object Properties</title>
+  </head>
+  <body>
+    <h1>Window Object Properties</h1>
+    
+
+
+    <h2>Examples</h2>
+    <p>Click the buttons below to see some window properties in action:</p>
+
+    <button onclick="showInnerDimensions()">Show Inner Dimensions</button>
+    <button onclick="showLocation()">Show Current Location</button>
+    <button onclick="showScreenInfo()">Show Screen Info</button>
+    <button onclick="showAlert()">Show Alert</button>
+    <button onclick="showNavigator()">Show Navigator Info</button>
+    <button onclick="showHistory()">Show History</button>
+
+    <div id="output"></div>
+
+    <script>
+      function showInnerDimensions() {
+        const output = document.getElementById("output");
+        output.innerHTML = `<p>Inner Width: ${window.innerWidth}px</p><p>Inner Height: ${window.innerHeight}px</p>`;
+      }
+
+      function showLocation() {
+        const output = document.getElementById("output");
+        output.innerHTML = `<p>Current URL: ${window.location.href}</p><p>Hostname: ${window.location.hostname}</p>`;
+      }
+
+      function showScreenInfo() {
+        const output = document.getElementById("output");
+        output.innerHTML = `<p>Screen Width: ${window.screen.width}px</p><p>Screen Height: ${window.screen.height}px</p>`;
+        }
+
+      function showAlert() {
+        alert("This is an alert message!");
+      }
+      function showNavigator() {
+        const output = document.getElementById("output");
+        output.innerHTML = `<p>Browser Name: ${window.navigator.appName}</p><p>Platform: ${window.navigator.platform}</p>`;
+      }
+      function showHistory() {
+        const output = document.getElementById("output");
+        output.innerHTML = `<p>Number of pages in history: ${window.history.length}</p>`;
+      }
+    </script>
+  </body>
+</html>
