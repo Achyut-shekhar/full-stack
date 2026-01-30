@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <title>Document</title>
+</head>
+<body>
+  <h3>Student Details</h3>
+  <p id="output"></p>
+<script>
+ let jsondata = `{
+    "students": [
+        {
+            "name": "Alice",
+            "age": 23,
+            "courses": ["Math", "Science"]
+        },
+        {
+            "name": "Bob",
+            "age": 25,
+            "courses": ["History", "Art"]
+        }
+    ]
+}`;
+let data = JSON.parse(jsondata);
+console.log(data);
+let output = document.getElementById("output");
+data.students.forEach(student => {
+    output.innerHTML += `<strong>Name:</strong> ${student.name}<br>`;
+    output.innerHTML += `<strong>Age:</strong> ${student.age}<br>`;
+    output.innerHTML += `<strong>Courses:</strong> ${student.courses.join(", ")}<br><br>`;
+});
+</script>
+</body>
+</html>

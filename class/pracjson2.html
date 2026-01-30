@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+    <title>JSON Practical Example</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+      input,
+      button {
+        padding: 8px;
+        margin: 5px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 60%;
+        margin-top: 10px;
+      }
+      th,
+      td {
+        border: 1px solid #999;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Student Registration (JSON Practical)</h2>
+    <input id="name" placeholder="Enter Name" />
+    <input id="roll" placeholder="Enter Roll No" />
+    <input id="dept" placeholder="Enter Department" />
+    <input id="phone" placeholder="Enter Phone No" />
+    <button onclick="saveStudent()">Save Student</button>
+    <button onclick="loadStudents()">Load Students</button>
+    <h3>Saved Students</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Roll</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <script>
+      function saveStudent() {
+        // 1) Read values from inputs
+        let name = document.getElementById("name").value.trim();
+        let roll = document.getElementById("roll").value.trim();
+        let dept = document.getElementById("dept").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        if (!name || !roll || !dept) {
+          alert("Please fill all fields!");
+          return;
+        }
+        // 2) Create a JavaScript object (NOT JSON yet)
+        let studentObj = {
+          roll: roll,
+          name: name,
+          dept: dept,
+          phone: phone,
+        };
+        // 3) Get existing students from localStorage (it is JSON string)
+        let oldData = localStorage.getItem("students"); // string OR null
+        // 4) Convert JSON string to JS array
+        let studentsArray = oldData ? JSON.parse(oldData) : [];
+        // 5) Add new student object into array
+        studentsArray.push(studentObj);
+        // 6) Convert JS array -> JSON string (because storage needs string)
+        localStorage.setItem("students", JSON.stringify(studentsArray));
+        // clear input
+        document.getElementById("name").value = "";
+        document.getElementById("roll").value = "";
+        document.getElementById("dept").value = "";
+        document.getElementById("phone").value = "";
+        alert("Student saved in JSON format!");
+        loadStudents(); // refresh table
+      }
+      function loadStudents() {
+        let data = localStorage.getItem("students"); // JSON string
+        // If no data, show empty
+        if (!data) {
+          document.getElementById("tableBody").innerHTML =
+            "<tr><td colspan='4'>No students found</td></tr>";
+          return;
+        }
+        // Convert JSON string back into JS array of objects
+        let studentsArray = JSON.parse(data);
+        let rows = "";
+        studentsArray.forEach((s) => {
+          rows += `
+<tr>
+<td>${s.roll}</td>
+<td>${s.name}</td>
+<td>${s.dept}</td>
+<td>${s.phone}</td>
+</tr>
+`;
+        });
+        document.getElementById("tableBody").innerHTML = rows;
+      }
+      // Auto-load table on page refresh
+      loadStudents();
+    </script>
+  </body>
+</html>
