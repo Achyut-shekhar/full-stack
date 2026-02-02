@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CSS Traffic Light</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .traffic-light {
+        background: #333;
+        width: 80px;
+        padding: 20px 15px;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        color: white;
+        overflow: hidden;
+      }
+      .light {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #444;
+      }
+      .light.red {
+        background: #800;
+      }
+      .light.yellow {
+        background: #880;
+      }
+      .light.green {
+        background: #080;
+      }
+      .light.red:hover {
+        background: #f00;
+        box-shadow: 0 0 20px #f004;
+        transform: scale(1.2);
+      }
+      .light.yellow:hover {
+        background: #ff0;
+        box-shadow: 0 0 20px #ff04;
+        transform: scale(1.2);
+      }
+      .light.green:hover {
+        background: #0f0;
+        box-shadow: 0 0 20px #0f04;
+        transform: scale(1.2);
+      }
+      .pole {
+        width: 18px;
+        height: 180px;
+        background: #333;
+        margin: -10px auto 0 auto;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px #0008;
+        z-index: -1;
+      }
+      .signal-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="signal-container">
+      <div class="traffic-light">
+        <div class="light red"></div>
+        <div class="light yellow"></div>
+        <div class="light green"></div>
+      </div>
+      <div class="pole"></div>
+    </div>
+  </body>
+</html>

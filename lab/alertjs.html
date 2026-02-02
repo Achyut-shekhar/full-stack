@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styled Alert Example</title>
+  <style>
+    body {
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .alert-btn {
+      padding: 12px 28px;
+      background: #0078d7;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #0002;
+      transition: background 0.2s;
+    }
+    .alert-btn:hover {
+      background: #005fa3;
+    }
+    .custom-alert {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px #0004;
+      padding: 32px 40px 24px 40px;
+      z-index: 1000;
+      text-align: center;
+      min-width: 260px;
+    }
+    .custom-alert h2 {
+      margin: 0 0 12px 0;
+      color: #0078d7;
+      font-size: 1.3rem;
+    }
+    .custom-alert p {
+      margin: 0 0 18px 0;
+      color: #333;
+      font-size: 1.05rem;
+    }
+    .close-btn {
+      padding: 8px 22px;
+      background: #e81123;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .close-btn:hover {
+      background: #b50d1e;
+    }
+    .alert-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #0006;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <button class="alert-btn" onclick="showAlert()">Show Alert</button>
+  <div class="alert-overlay" id="alertOverlay"></div>
+  <div class="custom-alert" id="customAlert">
+    <h2>Alert!</h2>
+    <p>This is a custom styled alert box.</p>
+    <button class="close-btn" onclick="closeAlert()">OK</button>
+  </div>
+  <script>
+    function showAlert() {
+      document.getElementById('customAlert').style.display = 'block';
+      document.getElementById('alertOverlay').style.display = 'block';
+    }
+    function closeAlert() {
+      document.getElementById('customAlert').style.display = 'none';
+      document.getElementById('alertOverlay').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
