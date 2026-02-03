@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 2: Forms and Frames</title>
+  </head>
+  <body>
+    <h1>Lab Program 2: Forms and Frames in HTML</h1>
+
+    <!-- HTML Form -->
+    <h2>1. Registration Form</h2>
+    <form action="#" method="post">
+      <fieldset>
+        <legend>Personal Information</legend>
+
+        <label for="fname">First Name:</label>
+        <input
+          type="text"
+          id="fname"
+          name="firstname"
+          placeholder="Enter first name"
+          required
+        />
+        <br /><br />
+
+        <label for="lname">Last Name:</label>
+        <input
+          type="text"
+          id="lname"
+          name="lastname"
+          placeholder="Enter last name"
+          required
+        />
+        <br /><br />
+
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+          required
+        />
+        <br /><br />
+
+        <label for="phone">Phone:</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="123-456-7890"
+          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        />
+        <br /><br />
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" />
+        <br /><br />
+
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="gender" value="other" />
+        <label for="other">Other</label>
+        <br /><br />
+
+        <label for="course">Course:</label>
+        <select id="course" name="course">
+          <option value="">--Select Course--</option>
+          <option value="cs">Computer Science</option>
+          <option value="it">Information Technology</option>
+          <option value="ec">Electronics</option>
+          <option value="me">Mechanical</option>
+        </select>
+        <br /><br />
+
+        <label>Interests:</label>
+        <input type="checkbox" id="coding" name="interest" value="coding" />
+        <label for="coding">Coding</label>
+        <input type="checkbox" id="sports" name="interest" value="sports" />
+        <label for="sports">Sports</label>
+        <input type="checkbox" id="music" name="interest" value="music" />
+        <label for="music">Music</label>
+        <br /><br />
+
+        <label for="address">Address:</label><br />
+        <textarea
+          id="address"
+          name="address"
+          rows="4"
+          cols="50"
+          placeholder="Enter your address"
+        ></textarea>
+        <br /><br />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <br /><br />
+
+        <label for="file">Upload Document:</label>
+        <input type="file" id="file" name="document" />
+        <br /><br />
+
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Reset" />
+      </fieldset>
+    </form>
+
+    <hr />
+
+    <!-- Frames Section -->
+    <h2>2. Frames Example Using Iframe</h2>
+    <p>
+      <strong>Note:</strong> Traditional frameset is deprecated in HTML5. Using
+      iframe instead.
+    </p>
+
+    <h3>Embedding External Website:</h3>
+    <iframe
+      src="https://www.example.com"
+      width="100%"
+      height="300"
+      title="Example Website"
+      style="border: 2px solid #333"
+    >
+    </iframe>
+
+    <h3>Embedding YouTube Video:</h3>
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      title="YouTube video player"
+      frameborder="0"
+      allow="
+        accelerometer;
+        autoplay;
+        clipboard-write;
+        encrypted-media;
+        gyroscope;
+        picture-in-picture;
+      "
+      allowfullscreen
+    >
+    </iframe>
+
+    <h3>Embedding Google Maps:</h3>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1841239145624!2d-73.98823492346034!3d40.75797593538289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1706934000000!5m2!1sen!2sus"
+      width="100%"
+      height="400"
+      style="border: 2px solid #666"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    >
+    </iframe>
+
+    <hr />
+    <footer>
+      <p><em>Lab Program 2 - Demonstrating Forms and Frames in HTML</em></p>
+    </footer>
+  </body>
+</html>
