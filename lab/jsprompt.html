@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Voting Eligibility Checker</title>
+	<style>
+		body {
+			background: #f0f4f8;
+			font-family: Arial, sans-serif;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+		}
+		.container {
+			background: #fff;
+			padding: 2rem 2.5rem;
+			border-radius: 10px;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+			text-align: center;
+		}
+		input[type="number"] {
+			padding: 0.5rem;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-bottom: 1rem;
+			width: 80px;
+		}
+		button {
+			padding: 0.5rem 1.2rem;
+			border: none;
+			border-radius: 5px;
+			background: #007bff;
+			color: #fff;
+			font-size: 1rem;
+			cursor: pointer;
+		}
+		.result {
+			margin-top: 1.5rem;
+			font-size: 1.1rem;
+			color: #333;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h2>Check Your Voting Eligibility</h2>
+		<label for="age">Enter your age:</label><br>
+		<input type="number" id="age" min="1" max="120" placeholder="Age">
+		<br>
+		<button onclick="checkEligibility()">Check</button>
+		<div class="result" id="result"></div>
+	</div>
+	<script>
+		function checkEligibility() {
+			var age = parseInt(document.getElementById('age').value);
+			var result = document.getElementById('result');
+			if (isNaN(age) || age <= 0) {
+				result.textContent = 'Please enter a valid age.';
+				result.style.color = '#d9534f';
+				return;
+			}
+			if (age < 18) {
+				var yearsLeft = 18 - age;
+				result.innerHTML = 'You are <b>not eligible</b> to vote.<br>' +
+					'You will be able to cast your vote after <b>' + yearsLeft + '</b> year' + (yearsLeft > 1 ? 's' : '') + '.';
+				result.style.color = '#d9534f';
+			} else {
+				result.innerHTML = 'Congratulations! You are <b>eligible</b> to vote.';
+				result.style.color = '#28a745';
+			}
+		}
+	</script>
+</body>
+</html>

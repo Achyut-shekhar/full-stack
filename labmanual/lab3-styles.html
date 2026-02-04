@@ -1,257 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lab 3: CSS Styling Methods</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab 3: CSS Styling Methods</title>
+  <!-- External Style Sheet -->
+  <link rel="stylesheet" href="lab3-external-styles.css" />
+  <!-- Internal Style Sheet -->
+  <style>
+    .internal-demo {
+      color: #0066cc;
+      background: #e8f4f8;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="color: #ff6600; text-align:center;">CSS Styling Methods</h2>
 
-    <!-- External Style Sheet -->
-    <link rel="stylesheet" href="lab3-external-styles.css" />
+  <!-- Inline Style Example -->
+  <div style="background:#fff3cd; padding:10px; margin-bottom:10px;">
+    <strong style="color:#d9534f;">This uses inline style!</strong>
+  </div>
 
-    <!-- Internal Style Sheet -->
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background-color: #f0f0f0;
-      }
+  <!-- Internal Style Example -->
+  <div class="internal-demo">
+    This uses internal style sheet (see &lt;style&gt; in &lt;head&gt;)
+  </div>
 
-      h1 {
-        text-align: center;
-        color: #333;
-        text-decoration: underline;
-      }
-
-      .internal-style-demo {
-        background-color: #e8f4f8;
-        padding: 20px;
-        border: 2px solid #0066cc;
-        border-radius: 10px;
-        margin: 20px 0;
-      }
-
-      .internal-style-demo h2 {
-        color: #0066cc;
-      }
-
-      .internal-style-demo p {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #333;
-      }
-
-      .internal-style-demo ul {
-        list-style-type: square;
-        color: #555;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Lab Program 3: CSS Styling Methods</h1>
-
-    <div class="intro">
-      <p>
-        This program demonstrates three different ways to apply CSS styles in
-        HTML:
-      </p>
-      <ol>
-        <li>Inline Styles</li>
-        <li>Internal Style Sheet</li>
-        <li>External Style Sheet</li>
-      </ol>
-    </div>
-
-    <hr />
-
-    <!-- Inline Style Examples -->
-    <div
-      style="
-        background-color: #fff3cd;
-        padding: 20px;
-        border-left: 5px solid #ffcc00;
-        margin: 20px 0;
-      "
-    >
-      <h2 style="color: #856404; margin-top: 0">1. Inline Style Example</h2>
-      <p style="color: #333; font-size: 16px; font-style: italic">
-        This section uses
-        <strong style="color: #ff6600">inline styles</strong> applied directly
-        to HTML elements using the style attribute.
-      </p>
-
-      <p
-        style="
-          background-color: #ffffff;
-          padding: 10px;
-          border: 1px dashed #856404;
-        "
-      >
-        Inline styles have the
-        <span style="color: red; font-weight: bold">highest priority</span>
-        and override both internal and external styles.
-      </p>
-
-      <div style="display: flex; gap: 10px; margin-top: 15px">
-        <div
-          style="
-            background-color: #ff6b6b;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            flex: 1;
-            text-align: center;
-          "
-        >
-          Red Box
-        </div>
-        <div
-          style="
-            background-color: #4ecdc4;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            flex: 1;
-            text-align: center;
-          "
-        >
-          Cyan Box
-        </div>
-        <div
-          style="
-            background-color: #45b7d1;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            flex: 1;
-            text-align: center;
-          "
-        >
-          Blue Box
-        </div>
-      </div>
-    </div>
-
-    <hr />
-
-    <!-- Internal Style Examples -->
-    <div class="internal-style-demo">
-      <h2>2. Internal Style Sheet Example</h2>
-      <p>
-        This section uses <strong>internal styles</strong> defined in the
-        &lt;style&gt; tag within the &lt;head&gt; section of the HTML document.
-      </p>
-
-      <p>
-        Internal styles apply to the entire page and are useful when you want to
-        style a single HTML document without affecting other pages.
-      </p>
-
-      <h3>Features of Internal Styles:</h3>
-      <ul>
-        <li>Defined within &lt;style&gt; tags in the &lt;head&gt; section</li>
-        <li>Apply to the entire HTML document</li>
-        <li>Override external styles but are overridden by inline styles</li>
-        <li>Useful for single-page styling</li>
-        <li>Can use CSS selectors, classes, and IDs</li>
-      </ul>
-    </div>
-
-    <hr />
-
-    <!-- External Style Examples -->
-    <div class="external-style-demo">
-      <h2>3. External Style Sheet Example</h2>
-      <p class="highlight">
-        This section uses <strong>external styles</strong> defined in a separate
-        CSS file (lab3-external-styles.css) linked to this HTML document.
-      </p>
-
-      <div class="card-container">
-        <div class="card card-primary">
-          <h3>External Styles</h3>
-          <p>Linked via &lt;link&gt; tag</p>
-        </div>
-
-        <div class="card card-success">
-          <h3>Reusable</h3>
-          <p>Can be used across multiple pages</p>
-        </div>
-
-        <div class="card card-info">
-          <h3>Maintainable</h3>
-          <p>Easy to update styles globally</p>
-        </div>
-      </div>
-
-      <div class="feature-box">
-        <h3>Advantages of External Style Sheets:</h3>
-        <ul>
-          <li>Separation of content (HTML) and presentation (CSS)</li>
-          <li>Reusable across multiple HTML pages</li>
-          <li>Easier to maintain and update</li>
-          <li>Reduces page load time through browser caching</li>
-          <li>Keeps HTML code clean and organized</li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <!-- Comparison Table -->
-    <div class="comparison-section">
-      <h2>Comparison of CSS Styling Methods</h2>
-      <table class="comparison-table">
-        <thead>
-          <tr>
-            <th>Method</th>
-            <th>Syntax</th>
-            <th>Priority</th>
-            <th>Use Case</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Inline</td>
-            <td>&lt;tag style="property: value;"&gt;</td>
-            <td>Highest</td>
-            <td>Quick specific changes</td>
-          </tr>
-          <tr>
-            <td>Internal</td>
-            <td>&lt;style&gt; in &lt;head&gt;</td>
-            <td>Medium</td>
-            <td>Single page styling</td>
-          </tr>
-          <tr>
-            <td>External</td>
-            <td>&lt;link rel="stylesheet" href="file.css"&gt;</td>
-            <td>Lowest</td>
-            <td>Multiple pages, best practice</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <hr />
-
-    <footer
-      style="
-        text-align: center;
-        margin-top: 30px;
-        padding: 20px;
-        background-color: #333;
-        color: white;
-      "
-    >
-      <p>
-        <em
-          >Lab Program 3 - Demonstrating Inline, Internal, and External CSS
-          Styles</em
-        >
-      </p>
-      <p style="font-size: 14px; margin-top: 10px">
-        All three styling methods demonstrated in one HTML file
-      </p>
-    </footer>
-  </body>
+  <!-- External Style Example -->
+  <div class="external-demo">
+    This uses external style sheet (see lab3-external-styles.css)
+  </div>
+</body>
 </html>
