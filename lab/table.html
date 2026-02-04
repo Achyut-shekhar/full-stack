@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiplication Table Generator</title>
+    <style>
+      th,
+      td {
+        padding: 0.7rem 1rem;
+        border: 1px solid #ccc;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      th {
+        background: #007bff;
+        color: #fff;
+      }
+      td:hover {
+        background: #ffeb3b;
+        color: white;
+      }
+      #container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+        background: #f0f4f8;
+        height: 100vh;
+        margin: 0;
+      }
+      input[type="number"] {
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+        width: 100px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Multiplication Table Generator</h2>
+      <label id="label" for="num">Enter a number:</label><br />
+      <input type="number" id="num" min="1" max="100" placeholder="Number" />
+      <br />
+      <button onclick="generateTable()">Show Table</button>
+      <div id="table-container"></div>
+    </div>
+    <script>
+      function generateTable() {
+        var n = parseInt(document.getElementById("num").value);
+        var container = document.getElementById("table-container");
+        if (isNaN(n) || n <= 0) {
+          container.innerHTML =
+            '<p style="color:#d9534f;">Please enter a valid positive number.</p>';
+          return;
+        }
+        var html = '<table><tr><th colspan="3">Table of ' + n + "</th></tr>";
+        for (var i = 1; i <= 10; i++) {
+          html +=
+            "<tr>" +
+            "<td>" +
+            n +
+            "</td>" +
+            "<td>x " +
+            i +
+            "</td>" +
+            "<td>" +
+            n * i +
+            "</td>" +
+            "</tr>";
+        }
+        html += "</table>";
+        container.innerHTML = html;
+      }
+    </script>
+  </body>
+</html>
