@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      JavaScript Event Listener Lab (All Events + Live Edit + Theory)
+    </title>
+    <style>
+      /* ====== INTERNAL CSS (for teaching) ====== */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 16px;
+        line-height: 1.35;
+      }
+      h1 {
+        margin: 0 0 10px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 14px;
+      }
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 12px;
+        background: #fff;
+      }
+      .muted {
+        color: #555;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      label {
+        font-size: 14px;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+      textarea {
+        width: 100%;
+        min-height: 110px;
+        font-family: Consolas, monospace;
+      }
+      button {
+        cursor: pointer;
+        background: #fafafa;
+      }
+      button:hover {
+        filter: brightness(0.97);
+      }
+      .box {
+        width: 180px;
+        height: 120px;
+        border: 2px dashed #666;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+      }
+      .box.small {
+        width: 120px;
+        height: 80px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 999px;
+        border: 1px solid #ddd;
+        font-size: 12px;
+        background: #f8f8f8;
+      }
+      .log {
+        height: 280px;
+        overflow: auto;
+        border: 1px solid #e1e1e1;
+        border-radius: 12px;
+        padding: 10px;
+        background: #fcfcfc;
+        font-family: Consolas, monospace;
+        font-size: 12px;
+      }
+      .log .item {
+        padding: 6px 8px;
+        border-bottom: 1px dashed #eee;
+      }
+      .log .item:last-child {
+        border-bottom: none;
+      }
+      .kbd {
+        font-family: Consolas, monospace;
+        padding: 2px 6px;
+        border: 1px solid #ddd;
+        border-bottom-width: 2px;
+        border-radius: 6px;
+        background: #fff;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .note {
+        background: #fff8e6;
+        border: 1px solid #ffe3a3;
+        padding: 10px;
+        border-radius: 12px;
+      }
+      .ok {
+        color: #0a7;
+      }
+      .warn {
+        color: #b50;
+      }
+      .danger {
+        color: #c00;
+      }
+      .highlight {
+        outline: 3px solid orange;
+        font-weight: bold;
+      }
+      .zebra tr:nth-child(even) td {
+        background: #f3f6ff;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 520px;
+      }
+      td {
+        border: 1px solid #999;
+        padding: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.15s;
+      }
+      td:hover {
+        background: #f70d34;
+      }
+      .footer {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #555;
+      }
+      .mono {
+        font-family: Consolas, monospace;
+      }
+      .tag {
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        background: #f7f7f7;
+      }
+      .sticky {
+        position: sticky;
+        top: 0;
+        background: white;
+        padding-top: 6px;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JavaScript Event Listener Lab</h1>
+    <div class="muted">
+      Single HTML file demonstrating <b>common JS events</b>,
+      <b>addEventListener()</b>, <b>event object</b>, <b>event delegation</b>,
+      <b>bubbling vs capturing</b>, and <b>live edit</b> (type your JS and run).
+    </div>
+
+    <div class="grid" style="margin-top: 12px">
+      <!-- ================= LEFT: THEORY + DEMOS ================= -->
+      <div class="card">
+        <div class="sticky">
+          <div class="row" style="justify-content: space-between">
+            <div>
+              <span class="pill">Theory</span>
+              <span class="pill">Practice</span>
+              <span class="pill">Live Log</span>
+            </div>
+            <div class="row">
+              <button id="btnClearLog">Clear Log</button>
+              <button id="btnResetAll">Reset Demo</button>
+            </div>
+          </div>
+          <hr
+            style="border: none; border-top: 1px solid #eee; margin: 10px 0"
+          />
+        </div>
+
+        <div class="note">
+          <b>Quick Theory</b><br />
+          <ul style="margin: 8px 0 0 18px">
+            <li>
+              <b>Event</b> = action in browser (click, keypress, submit, load,
+              etc.).
+            </li>
+            <li>
+              <b>Event Listener</b> attaches a function to an element:
+              <span class="mono"
+                >element.addEventListener("click", callback)</span
+              >
+            </li>
+            <li>
+              <b>Event Object (e)</b>: <span class="mono">e.type</span>,
+              <span class="mono">e.target</span>,
+              <span class="mono">e.key</span>,
+              <span class="mono">e.preventDefault()</span>,
+              <span class="mono">e.stopPropagation()</span>
+            </li>
+            <li>
+              <b>Bubbling</b>: child ➜ parent (default). <b>Capturing</b>:
+              parent ➜ child (optional).
+            </li>
+            <li>
+              <b>Event Delegation</b>: attach one listener to parent; handle
+              children via <span class="mono">e.target</span>.
+            </li>
+          </ul>
+        </div>
+
+        <h3 style="margin: 14px 0 8px">1) Mouse Events</h3>
+        <div class="two">
+          <div class="card" style="border-color: #eee">
+            <b>Click / Double Click</b> <span class="tag">click</span>
+            <span class="tag">dblclick</span><br /><br />
+            <button id="btnClick">Click Me</button>
+            <button id="btnDblClick">Double Click Me</button>
+            <div class="footer">
+              Uses <span class="kbd">addEventListener</span> (not inline).
+            </div>
+          </div>
+
+          <div class="card" style="border-color: #eee">
+            <b>Mouse Enter/Leave</b> <span class="tag">mouseenter</span>
+            <span class="tag">mouseleave</span><br /><br />
+            <div id="hoverBox" class="box">Hover Me</div>
+            <div class="footer">Hover changes text and border style.</div>
+          </div>
+        </div>
+
+        <div class="two" style="margin-top: 10px">
+          <div class="card" style="border-color: #eee">
+            <b>Mouse Move</b> <span class="tag">mousemove</span><br /><br />
+            <div id="moveBox" class="box small">Move</div>
+            <div class="footer">Shows (x, y) inside box.</div>
+          </div>
+
+          <div class="card" style="border-color: #eee">
+            <b>Context Menu</b> <span class="tag">contextmenu</span><br /><br />
+            <div id="rightClickBox" class="box small">Right Click</div>
+            <div class="footer">Prevents default right-click menu.</div>
+          </div>
+        </div>
+
+        <h3 style="margin: 14px 0 8px">2) Keyboard + Input Events</h3>
+        <div class="two">
+          <div class="card" style="border-color: #eee">
+            <b>Keyboard</b> <span class="tag">keydown</span>
+            <span class="tag">keyup</span><br /><br />
+            <input
+              id="keyInput"
+              type="text"
+              placeholder="Type here (watch log)"
+            />
+            <div class="footer">
+              Logs pressed key using <span class="mono">e.key</span>.
+            </div>
+          </div>
+
+          <div class="card" style="border-color: #eee">
+            <b>Input / Change / Focus / Blur</b>
+            <div style="margin-top: 8px">
+              <input
+                id="nameInput"
+                type="text"
+                placeholder="Name (input event)"
+              />
+            </div>
+            <div style="margin-top: 8px">
+              <select id="deptSelect">
+                <option value="">Select Department</option>
+                <option>CSE</option>
+                <option>ECE</option>
+                <option>ME</option>
+                <option>Civil</option>
+              </select>
+            </div>
+            <div class="footer">
+              <span class="tag">input</span> <span class="tag">change</span>
+              <span class="tag">focus</span> <span class="tag">blur</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin: 14px 0 8px">3) Form Events</h3>
+        <div class="card" style="border-color: #eee">
+          <b>Submit + preventDefault()</b> <span class="tag">submit</span
+          ><br /><br />
+          <form id="demoForm" class="row">
+            <input
+              id="emailInput"
+              type="email"
+              placeholder="Email (required)"
+              required
+            />
+            <button type="submit">Submit</button>
+            <span id="formMsg" class="muted"></span>
+          </form>
+          <div class="footer">Form will not refresh page (preventDefault).</div>
+        </div>
+
+        <h3 style="margin: 14px 0 8px">4) Window + Document Events</h3>
+        <div class="two">
+          <div class="card" style="border-color: #eee">
+            <b>Scroll</b> <span class="tag">scroll</span><br /><br />
+            <div
+              style="
+                height: 80px;
+                overflow: auto;
+                border: 1px solid #ddd;
+                border-radius: 12px;
+                padding: 10px;
+              "
+              id="scrollArea"
+            >
+              Scroll inside this box to trigger scroll event.<br /><br />
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+              risus. Suspendisse lectus tortor, dignissim sit amet.<br /><br />
+              Aliquam erat volutpat. Nullam in dui mauris. Vivamus hendrerit
+              arcu sed erat molestie vehicula.
+            </div>
+            <div class="footer">Logs scrollTop value.</div>
+          </div>
+
+          <div class="card" style="border-color: #eee">
+            <b>Resize</b> <span class="tag">resize</span><br /><br />
+            <div class="muted">
+              Resize the browser window and watch the log.
+            </div>
+            <div class="footer">Logs window size: innerWidth × innerHeight</div>
+          </div>
+        </div>
+
+        <h3 style="margin: 14px 0 8px">
+          5) Event Delegation (Table: one listener handles many cells)
+        </h3>
+        <div class="card" style="border-color: #eee">
+          <div class="row" style="justify-content: space-between">
+            <b>5×5 Table</b>
+            <div class="row">
+              <button id="btnZebra">Toggle Zebra</button>
+              <button id="btnTableReset">Reset Table</button>
+            </div>
+          </div>
+          <div class="muted" style="margin: 6px 0 10px">
+            Click any cell → highlight via <b>event delegation</b> using
+            <span class="mono">e.target</span>.
+          </div>
+          <table id="myTable">
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+                <td>25</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin: 14px 0 8px">6) Bubbling vs Capturing Demo</h3>
+        <div class="card" style="border-color: #eee">
+          <div class="muted">
+            Click the <b>Inner</b> box. We attach listeners on Parent and Child
+            in both phases. Default is bubbling; capturing happens first if
+            enabled.
+          </div>
+          <div
+            style="
+              margin-top: 10px;
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+              align-items: center;
+            "
+          >
+            <div id="parentBox" class="box" style="border-style: solid">
+              Parent
+              <div
+                id="childBox"
+                class="box small"
+                style="border-style: solid; margin-left: 10px"
+              >
+                Inner
+              </div>
+            </div>
+            <div class="note" style="max-width: 360px">
+              <b>Observe log order</b><br />
+              Capturing: Parent ➜ Child<br />
+              Bubbling: Child ➜ Parent<br />
+              Use checkbox to enable/disable capturing logs.
+            </div>
+          </div>
+          <div class="row" style="margin-top: 10px">
+            <label
+              ><input type="checkbox" id="chkCapture" checked /> Enable
+              Capturing Listener</label
+            >
+            <label
+              ><input type="checkbox" id="chkStopProp" /> stopPropagation on
+              child click</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= RIGHT: LIVE EDIT + LOG ================= -->
+      <div class="card">
+        <div class="row" style="justify-content: space-between">
+          <div>
+            <span class="pill">Live Edit</span>
+            <span class="pill">Run Your JS</span>
+          </div>
+          <div class="row">
+            <button id="btnLoadExample">Load Example</button>
+            <button id="btnRun">Run JS</button>
+          </div>
+        </div>
+
+        <p class="muted" style="margin: 10px 0">
+          Write JavaScript below and click <b>Run JS</b>. Your code runs in this
+          page. Example: attach a new event, change styles, log something, etc.
+        </p>
+
+        <textarea id="codeArea" spellcheck="false">
+// Write your JS here, then click "Run JS".</textarea
+        >
+
+        <div class="note" style="margin-top: 10px">
+          <b>Helpful IDs to use in your code:</b><br />
+          <span class="mono">
+            btnClick, hoverBox, keyInput, nameInput, deptSelect, demoForm,
+            myTable, parentBox, childBox, scrollArea
+          </span>
+        </div>
+
+        <h3 style="margin: 14px 0 8px">Live Event Log</h3>
+        <div id="log" class="log"></div>
+
+        <div class="footer">
+          Tip: Open browser console too (<span class="kbd">F12</span>) to show
+          logs for students.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ============================================================
+     INTERNAL JAVASCRIPT: EVENT LISTENER DEMOS + LIVE EDIT
+     ============================================================ */
+
+      // ---- Logging helper ----
+      const logBox = document.getElementById("log");
+      function log(msg, type = "") {
+        const div = document.createElement("div");
+        div.className = "item";
+        const prefix = type ? `[${type}] ` : "";
+        div.textContent = `${new Date().toLocaleTimeString()}  ${prefix}${msg}`;
+        logBox.prepend(div);
+      }
+
+      // ---- Reset helpers ----
+      function clearHighlights() {
+        document
+          .querySelectorAll(".highlight")
+          .forEach((el) => el.classList.remove("highlight"));
+      }
+
+      // ---- Buttons: Clear log / reset all ----
+      document.getElementById("btnClearLog").addEventListener("click", () => {
+        logBox.innerHTML = "";
+        log("Log cleared.", "INFO");
+      });
+
+      document.getElementById("btnResetAll").addEventListener("click", () => {
+        // reset form, inputs, styles
+        document.getElementById("demoForm").reset();
+        document.getElementById("formMsg").textContent = "";
+        clearHighlights();
+        document.getElementById("myTable").classList.remove("zebra");
+        document.getElementById("hoverBox").style.borderStyle = "dashed";
+        document.getElementById("hoverBox").textContent = "Hover Me";
+        document.getElementById("moveBox").textContent = "Move";
+        log("Demo reset done.", "RESET");
+      });
+
+      // ============================================================
+      // 1) Mouse events
+      // ============================================================
+      document.getElementById("btnClick").addEventListener("click", (e) => {
+        log(`Button clicked. target=${e.target.id}`, "click");
+      });
+
+      document
+        .getElementById("btnDblClick")
+        .addEventListener("dblclick", (e) => {
+          log(`Button double-clicked. type=${e.type}`, "dblclick");
+        });
+
+      const hoverBox = document.getElementById("hoverBox");
+      hoverBox.addEventListener("mouseenter", () => {
+        hoverBox.style.borderStyle = "solid";
+        hoverBox.textContent = "Mouse Enter ✅";
+        log("mouseenter on hoverBox", "mouseenter");
+      });
+      hoverBox.addEventListener("mouseleave", () => {
+        hoverBox.style.borderStyle = "dashed";
+        hoverBox.textContent = "Mouse Leave 👋";
+        log("mouseleave on hoverBox", "mouseleave");
+        setTimeout(() => (hoverBox.textContent = "Hover Me"), 700);
+      });
+
+      const moveBox = document.getElementById("moveBox");
+      moveBox.addEventListener("mousemove", (e) => {
+        // offsetX/Y: mouse position within element
+        moveBox.textContent = `${e.offsetX}, ${e.offsetY}`;
+      });
+      moveBox.addEventListener(
+        "mouseleave",
+        () => (moveBox.textContent = "Move"),
+      );
+
+      const rightClickBox = document.getElementById("rightClickBox");
+      rightClickBox.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        log("contextmenu (right-click) prevented default menu", "contextmenu");
+      });
+
+      // ============================================================
+      // 2) Keyboard + input events
+      // ============================================================
+      const keyInput = document.getElementById("keyInput");
+      keyInput.addEventListener("keydown", (e) =>
+        log(`keydown key=${e.key}`, "keydown"),
+      );
+      keyInput.addEventListener("keyup", (e) =>
+        log(`keyup key=${e.key}`, "keyup"),
+      );
+
+      const nameInput = document.getElementById("nameInput");
+      nameInput.addEventListener("focus", () =>
+        log("nameInput focused", "focus"),
+      );
+      nameInput.addEventListener("blur", () =>
+        log("nameInput blurred", "blur"),
+      );
+      nameInput.addEventListener("input", (e) =>
+        log(`input value="${e.target.value}"`, "input"),
+      );
+
+      const deptSelect = document.getElementById("deptSelect");
+      deptSelect.addEventListener("change", (e) =>
+        log(`change selected="${e.target.value}"`, "change"),
+      );
+
+      // ============================================================
+      // 3) Form submit
+      // ============================================================
+      const demoForm = document.getElementById("demoForm");
+      const formMsg = document.getElementById("formMsg");
+      demoForm.addEventListener("submit", (e) => {
+        e.preventDefault(); // important concept
+        const email = document.getElementById("emailInput").value.trim();
+        formMsg.textContent = email
+          ? "✅ Submitted (no page refresh)"
+          : "⚠️ Please enter email";
+        formMsg.className = email ? "ok" : "warn";
+        log(`submit prevented default. email="${email}"`, "submit");
+      });
+
+      // ============================================================
+      // 4) Scroll + resize
+      // ============================================================
+      const scrollArea = document.getElementById("scrollArea");
+      scrollArea.addEventListener("scroll", () => {
+        log(`scrollArea scrollTop=${scrollArea.scrollTop}`, "scroll");
+      });
+
+      window.addEventListener("resize", () => {
+        log(
+          `window resized: ${window.innerWidth} x ${window.innerHeight}`,
+          "resize",
+        );
+      });
+
+      // ============================================================
+      // 5) Event Delegation (table)
+      // ============================================================
+      const table = document.getElementById("myTable");
+      table.addEventListener("click", (e) => {
+        if (e.target.tagName === "TD") {
+          table
+            .querySelectorAll("td")
+            .forEach((td) => td.classList.remove("highlight"));
+          e.target.classList.add("highlight");
+          log(`table cell clicked: value=${e.target.innerText}`, "delegation");
+        }
+      });
+
+      document.getElementById("btnZebra").addEventListener("click", () => {
+        table.classList.toggle("zebra");
+        log(`zebra toggled: ${table.classList.contains("zebra")}`, "ui");
+      });
+
+      document.getElementById("btnTableReset").addEventListener("click", () => {
+        table.classList.remove("zebra");
+        table
+          .querySelectorAll("td")
+          .forEach((td) => td.classList.remove("highlight"));
+        log("table reset done", "ui");
+      });
+
+      // ============================================================
+      // 6) Bubbling vs capturing
+      // ============================================================
+      const parentBox = document.getElementById("parentBox");
+      const childBox = document.getElementById("childBox");
+      const chkCapture = document.getElementById("chkCapture");
+      const chkStopProp = document.getElementById("chkStopProp");
+
+      // We will manage capturing listeners dynamically (add/remove)
+      let parentCaptureHandler = null;
+      let childCaptureHandler = null;
+
+      function attachCaptureListeners() {
+        parentCaptureHandler = (e) =>
+          log(`CAPTURE: parentBox (target=${e.target.id})`, "capture");
+        childCaptureHandler = (e) =>
+          log(`CAPTURE: childBox (target=${e.target.id})`, "capture");
+
+        parentBox.addEventListener("click", parentCaptureHandler, true);
+        childBox.addEventListener("click", childCaptureHandler, true);
+      }
+
+      function detachCaptureListeners() {
+        if (parentCaptureHandler)
+          parentBox.removeEventListener("click", parentCaptureHandler, true);
+        if (childCaptureHandler)
+          childBox.removeEventListener("click", childCaptureHandler, true);
+        parentCaptureHandler = null;
+        childCaptureHandler = null;
+      }
+
+      // Bubbling listeners (always attached)
+      parentBox.addEventListener("click", (e) =>
+        log(`BUBBLE: parentBox (target=${e.target.id})`, "bubble"),
+      );
+      childBox.addEventListener("click", (e) => {
+        log(`BUBBLE: childBox (target=${e.target.id})`, "bubble");
+        if (chkStopProp.checked) {
+          e.stopPropagation();
+          log("stopPropagation() called on child click", "stopPropagation");
+        }
+      });
+
+      // toggle capture listeners
+      if (chkCapture.checked) attachCaptureListeners();
+      chkCapture.addEventListener("change", () => {
+        if (chkCapture.checked) {
+          attachCaptureListeners();
+          log("Capturing listeners enabled", "capture");
+        } else {
+          detachCaptureListeners();
+          log("Capturing listeners disabled", "capture");
+        }
+      });
+
+      // ============================================================
+      // Live Edit: run user JS safely-ish (in page context)
+      // ============================================================
+      const codeArea = document.getElementById("codeArea");
+
+      document
+        .getElementById("btnLoadExample")
+        .addEventListener("click", () => {
+          codeArea.value = `// Example: add a new event listener to the table for double-click
+const myTable = document.getElementById("myTable");
+
+myTable.addEventListener("dblclick", (e) => {
+  if (e.target.tagName === "TD") {
+    e.target.style.background = "lightgreen";
+    console.log("Double-clicked cell:", e.target.innerText);
+  }
+});
+
+// Example: add a key shortcut (Ctrl+K) to clear the log
+window.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.key.toLowerCase() === "k") {
+    document.getElementById("log").innerHTML = "";
+    console.log("Log cleared via Ctrl+K");
+  }
+});`;
+          log("Loaded example code into editor.", "LIVE");
+        });
+
+      document.getElementById("btnRun").addEventListener("click", () => {
+        try {
+          // Run user code in the current page scope
+          // (For teaching; in real apps avoid eval for security)
+          eval(codeArea.value);
+          log("User JS executed successfully ✅", "LIVE");
+        } catch (err) {
+          log(`Error: ${err.message}`, "ERROR");
+        }
+      });
+
+      // Initial info logs (like load demo)
+      window.addEventListener("load", () =>
+        log("window load event fired (page ready)", "load"),
+      );
+    </script>
+  </body>
+</html>

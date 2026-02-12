@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facebook Login</title>
+    <style>
+      body {
+        background-color: #f0f2f5;
+        font-family: Arial, sans-serif;
+        margin-top: 50px;
+      }
+
+      h1 {
+        color: #1877f2;
+        font-size: 50px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        color: #606770;
+        font-size: 18px;
+      }
+
+      input {
+        width: 350px;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #dddfe2;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 350px;
+        padding: 12px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button[type="submit"] {
+        background-color: #1877f2;
+        color: white;
+      }
+
+      button[type="button"] {
+        background-color: #42b72a;
+        color: white;
+      }
+
+      a {
+        color: #1877f2;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid #dadde1;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1>Facebook</h1>
+      <p>Login to your account</p>
+      <br />
+
+      <form onsubmit="handleLogin(event)">
+        <input
+          type="text"
+          id="username"
+          placeholder="Email or phone number"
+          required
+        />
+        <br /><br />
+        <input type="password" id="password" placeholder="Password" required />
+        <br /><br />
+        <button type="submit">Log In</button>
+        <br /><br />
+        <a href="#">Forgot password?</a>
+        <br /><br />
+        <hr width="300px" />
+        <br />
+        <button type="button" onclick="createAccount()">
+          Create new account
+        </button>
+      </form>
+    </center>
+
+    <script>
+      // Event listener for keydown on username field
+      document
+        .getElementById("username")
+        .addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            alert("You entered: " + this.value);
+          }
+        });
+
+      // Event listener for keyup on username field
+      document
+        .getElementById("username")
+        .addEventListener("keyup", function (event) {
+          console.log("Key released: " + event.key);
+        });
+         document
+        .getElementById("password")
+        .addEventListener("keyup", function (event) {
+          console.log("Key released: " + event.key);
+        });
+
+      // Handle login form submission
+      function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        alert(`Login attempt:\nUsername: ${username}\nPassword: ${password}`);
+      }
+
+      // Handle create account button
+      function createAccount() {
+        alert(
+          "Create New Account feature - This would redirect to sign up page",
+        );
+      }
+    </script>
+  </body>
+</html>
