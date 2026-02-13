@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>jQuery Functions Demonstration</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 30px;
+      }
+
+      .box {
+        width: 300px;
+        padding: 15px;
+        background: lightblue;
+        margin: 10px 0;
+      }
+
+      .highlight {
+        background: yellow;
+        color: red;
+        font-weight: bold;
+      }
+
+      button {
+        margin: 5px;
+        padding: 6px 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>jQuery Function Demonstration</h2>
+
+    <!-- Box for hide/show/toggle -->
+    <div id="demoBox" class="box">This is a sample box.</div>
+
+    <button id="hideBtn">Hide</button>
+    <button id="showBtn">Show</button>
+    <button id="toggleBtn">Toggle</button>
+
+    <hr />
+
+    <!-- CSS Manipulation -->
+    <button id="cssBtn">Change CSS</button>
+
+    <hr />
+
+    <!-- Text & HTML -->
+    <p id="textPara">Original Text</p>
+    <button id="textBtn">Change Text</button>
+    <button id="htmlBtn">Change HTML</button>
+
+    <hr />
+
+    <!-- Input Value -->
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+    <button id="valBtn">Show Input Value</button>
+    <p id="output"></p>
+
+    <hr />
+
+    <!-- Add & Remove Class -->
+    <p id="classPara">This paragraph will be highlighted.</p>
+    <button id="addClassBtn">Add Class</button>
+    <button id="removeClassBtn">Remove Class</button>
+
+    <!-- testing all cases -->
+    <hr />
+    <h3>Individual Function Tests</h3>
+    <div id="testBox" class="box">Test Box</div>
+    <p id="testPara">Test paragraph for all functions.</p>
+
+    <button id="testToggleBtn">Toggle Test Box</button>
+    <button id="testCssBtn">Change Test Box CSS</button>
+    <button id="testTextBtn">Change Test Paragraph Text</button>
+    <button id="testHtmlBtn">Change Test Paragraph HTML</button>
+    <button id="testValBtn">Get Input Value</button>
+    <button id="testAddClassBtn">Add Highlight to Test Paragraph</button>
+    <p id="testOutput"></p>
+    <hr />
+
+    <script>
+      $(document).ready(function () {
+        // .hide()
+        $("#hideBtn").click(function () {
+          $("#demoBox").hide();
+        });
+
+        // .show()
+        $("#showBtn").click(function () {
+          $("#demoBox").show();
+        });
+
+        // .toggle()
+        $("#toggleBtn").click(function () {
+          $("#demoBox").toggle();
+        });
+
+        // .css()
+        $("#cssBtn").click(function () {
+          $("#demoBox").css({
+            "background-color": "lightgreen",
+            border: "2px solid black",
+            "font-size": "18px",
+          });
+        });
+
+        // .text()
+        $("#textBtn").click(function () {
+          $("#textPara").text("Text changed using .text() method");
+        });
+
+        // .html()
+        $("#htmlBtn").click(function () {
+          $("#textPara").html("<b>Bold HTML</b> added using .html()");
+        });
+
+        // .val()
+        $("#valBtn").click(function () {
+          let value = $("#nameInput").val();
+          $("#output").text("You entered: " + value);
+        });
+
+        // .addClass()
+        $("#addClassBtn").click(function () {
+          $("#classPara").addClass("highlight");
+        });
+
+        // .removeClass()
+        $("#removeClassBtn").click(function () {
+          $("#classPara").removeClass("highlight");
+        });
+
+        // Individual Test Functions
+        // Test .toggle()
+        $("#testToggleBtn").click(function () {
+          $("#testBox").toggle();
+        });
+
+        // Test .css()
+        $("#testCssBtn").click(function () {
+          $("#testBox").css({
+            "background-color": "lightyellow",
+            border: "2px solid black",
+            "font-size": "18px",
+          });
+        });
+
+        // Test .text()
+        $("#testTextBtn").click(function () {
+          $("#testPara").text("Text changed using .text() method");
+        });
+
+        // Test .html()
+        $("#testHtmlBtn").click(function () {
+          $("#testPara").html("<b>Bold HTML</b> added using .html()");
+        });
+
+        // Test .val()
+        $("#testValBtn").click(function () {
+          let value = $("#nameInput").val();
+          $("#testOutput").text("You entered: " + value);
+        });
+
+        // Test .addClass()
+        $("#testAddClassBtn").click(function () {
+          $("#testPara").addClass("highlight");
+        });
+      });
+    </script>
+  </body>
+</html>
