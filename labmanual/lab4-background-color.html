@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Background Color Changer</title>
+    <style>
+      body {
+        font-family: Arial;
+        text-align: center;
+        padding: 50px;
+      }
+
+      h1 {
+        color: blue;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Background Color Changer</h1>
+    <p>Click the button to change background color</p>
+
+    <button onclick="changeColor()">Change Color</button>
+
+    <script>
+      var colors = [
+        "red",
+        "blue",
+        "green",
+        "yellow",
+        "pink",
+        "orange",
+        "purple",
+        "lightblue",
+        "lightgreen",
+      ];
+      var i = 0;
+
+      function changeColor() {
+        document.body.style.backgroundColor = colors[i];
+        i++;
+        if (i >= colors.length) {
+          i = 0;
+        }
+      }
+    </script>
+  </body>
+</html>

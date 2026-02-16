@@ -1,0 +1,450 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Image Maps Demo</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+
+      h1 {
+        color: blue;
+        text-align: center;
+      }
+
+      h2 {
+        color: green;
+      }
+
+      img {
+        border: 2px solid black;
+        margin: 10px;
+      }
+
+      p {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Image Maps Demo</h1>
+    <p>Click on the colored areas in each image</p>
+
+    <!-- 1. CIRCLE IMAGE MAP -->
+    <h2>1. Circle Image Map</h2>
+    <p>Click on the circles below</p>
+
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Crect width='600' height='300' fill='%23f0f0f0'/%3E%3Ccircle cx='150' cy='150' r='80' fill='%23FF6B6B'/%3E%3Ctext x='150' y='155' text-anchor='middle' font-size='20' fill='white' font-weight='bold'%3ERed%3C/text%3E%3Ccircle cx='300' cy='150' r='80' fill='%234ECDC4'/%3E%3Ctext x='300' y='155' text-anchor='middle' font-size='20' fill='white' font-weight='bold'%3EGreen%3C/text%3E%3Ccircle cx='450' cy='150' r='80' fill='%23FFD93D'/%3E%3Ctext x='450' y='155' text-anchor='middle' font-size='20' fill='black' font-weight='bold'%3EYellow%3C/text%3E%3C/svg%3E"
+      alt="Circle Map"
+      usemap="#circleMap"
+    />
+
+    <map name="circleMap">
+      <area
+        shape="circle"
+        coords="150,150,80"
+        href="#"
+        alt="Red Circle"
+        onclick="
+          alert('You clicked Red Circle!');
+          return false;
+        "
+      />
+      <area
+        shape="circle"
+        coords="300,150,80"
+        href="#"
+        alt="Green Circle"
+        onclick="
+          alert('You clicked Green Circle!');
+          return false;
+        "
+      />
+      <area
+        shape="circle"
+        coords="450,150,80"
+        href="#"
+        alt="Yellow Circle"
+        onclick="
+          alert('You clicked Yellow Circle!');
+          return false;
+        "
+      />
+    </map>
+
+    <hr />
+
+    <!-- 2. RECTANGLE IMAGE MAP -->
+    <div class="map-container">
+      <h2>2. Rectangle (rect) Image Map</h2>
+      <p>
+        Click on the rectangular colored regions. Each rectangle is defined
+        using <code>shape="rect"</code>.
+      </p>
+
+      <div class="info-box">
+        <h3>Syntax:</h3>
+        <code
+          >&lt;area shape="rect" coords="x1,y1,x2,y2" href="#"
+          alt="description"&gt;</code
+        >
+        <p style="margin-top: 10px">
+          <strong>coords:</strong> x1,y1 (top-left corner), x2,y2 (bottom-right
+          corner)
+        </p>
+      </div>
+
+      <img
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Crect width='600' height='300' fill='%23f0f0f0'/%3E%3Crect x='30' y='50' width='160' height='200' fill='%239B59B6'/%3E%3Ctext x='110' y='155' text-anchor='middle' font-size='18' fill='white' font-weight='bold'%3EPurple%3C/text%3E%3Crect x='220' y='50' width='160' height='200' fill='%23E74C3C'/%3E%3Ctext x='300' y='155' text-anchor='middle' font-size='18' fill='white' font-weight='bold'%3ERed%3C/text%3E%3Crect x='410' y='50' width='160' height='200' fill='%233498DB'/%3E%3Ctext x='490' y='155' text-anchor='middle' font-size='18' fill='white' font-weight='bold'%3EBlue%3C/text%3E%3C/svg%3E"
+        alt="Rectangle Map Demo"
+        usemap="#rectMap"
+      />
+
+      <map name="rectMap">
+        <area
+          shape="rect"
+          coords="30,50,190,250"
+          href="#"
+          alt="Purple Rectangle"
+          onclick="
+            showMessage(
+              'Purple Rectangle',
+              'You clicked on the PURPLE rectangular region!',
+            );
+            return false;
+          "
+        />
+        <area
+          shape="rect"
+          coords="220,50,380,250"
+          href="#"
+          alt="Red Rectangle"
+          onclick="
+            showMessage(
+              'Red Rectangle',
+              'You clicked on the RED rectangular region!',
+            );
+            return false;
+          "
+        />
+        <area
+          shape="rect"
+          coords="410,50,570,250"
+          href="#"
+          alt="Blue Rectangle"
+          onclick="
+            showMessage(
+              'Blue Rectangle',
+              'You clicked on the BLUE rectangular region!',
+            );
+            return false;
+          "
+        />
+      </map>
+
+      <div id="rectResult" class="result"></div>
+    </div>
+
+    <!-- 3. POLYGON IMAGE MAP -->
+    <div class="map-container">
+      <h2>3. Polygon (poly) Image Map</h2>
+      <p>
+        Click on the polygon shapes (triangle, pentagon, star). Each shape is
+        defined using <code>shape="poly"</code>.
+      </p>
+
+      <div class="info-box">
+        <h3>Syntax:</h3>
+        <code
+          >&lt;area shape="poly" coords="x1,y1,x2,y2,x3,y3,..." href="#"
+          alt="description"&gt;</code
+        >
+        <p style="margin-top: 10px">
+          <strong>coords:</strong> x,y coordinates of each vertex of the polygon
+        </p>
+      </div>
+
+      <img
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Crect width='600' height='300' fill='%23f0f0f0'/%3E%3Cpolygon points='110,50 50,200 170,200' fill='%2326A69A'/%3E%3Ctext x='110' y='160' text-anchor='middle' font-size='16' fill='white' font-weight='bold'%3ETriangle%3C/text%3E%3Cpolygon points='300,50 350,120 320,200 280,200 250,120' fill='%23FF7043'/%3E%3Ctext x='300' y='135' text-anchor='middle' font-size='14' fill='white' font-weight='bold'%3EPentagon%3C/text%3E%3Cpolygon points='490,80 510,140 470,160 450,120 470,100' fill='%23FFA726'/%3E%3Ctext x='480' y='130' text-anchor='middle' font-size='14' fill='white' font-weight='bold'%3EStar%3C/text%3E%3C/svg%3E"
+        alt="Polygon Map Demo"
+        usemap="#polyMap"
+      />
+
+      <map name="polyMap">
+        <!-- Triangle -->
+        <area
+          shape="poly"
+          coords="110,50,50,200,170,200"
+          href="#"
+          alt="Triangle"
+          onclick="
+            showMessage(
+              'Triangle',
+              'You clicked on the TRIANGLE (teal polygon)!',
+            );
+            return false;
+          "
+        />
+        <!-- Pentagon -->
+        <area
+          shape="poly"
+          coords="300,50,350,120,320,200,280,200,250,120"
+          href="#"
+          alt="Pentagon"
+          onclick="
+            showMessage(
+              'Pentagon',
+              'You clicked on the PENTAGON (orange polygon)!',
+            );
+            return false;
+          "
+        />
+        <!-- Star (simplified) -->
+        <area
+          shape="poly"
+          coords="490,80,510,140,470,160,450,120,470,100"
+          href="#"
+          alt="Star"
+          onclick="
+            showMessage('Star', 'You clicked on the STAR (amber polygon)!');
+            return false;
+          "
+        />
+      </map>
+
+      <div id="polyResult" class="result"></div>
+    </div>
+
+    <!-- 4. MIXED IMAGE MAP -->
+    <div class="map-container">
+      <h2>4. Mixed Image Map</h2>
+      <p>
+        This image combines all three types: circles, rectangles, and polygons
+        in a single map. Click on any shape!
+      </p>
+
+      <div class="info-box">
+        <h3>Mixed Map Explanation:</h3>
+        <p>
+          A single image can have multiple area tags with different shapes. This
+          is useful for complex clickable regions like website navigation,
+          interactive diagrams, or game interfaces.
+        </p>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #e91e63"></div>
+          <span>Pink Circle</span>
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-color"
+            style="background-color: #2196f3; border-radius: 0"
+          ></div>
+          <span>Blue Rectangle</span>
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-color"
+            style="
+              background-color: #4caf50;
+              clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            "
+          ></div>
+          <span>Green Triangle</span>
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-color"
+            style="background-color: #ff9800; border-radius: 0"
+          ></div>
+          <span>Orange Rectangle</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #9c27b0"></div>
+          <span>Purple Circle</span>
+        </div>
+      </div>
+
+      <img
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='350'%3E%3Crect width='600' height='350' fill='%23f8f9fa'/%3E%3Ccircle cx='100' cy='100' r='60' fill='%23E91E63'/%3E%3Ctext x='100' y='105' text-anchor='middle' font-size='14' fill='white' font-weight='bold'%3ECircle 1%3C/text%3E%3Crect x='200' y='40' width='120' height='120' fill='%232196F3'/%3E%3Ctext x='260' y='105' text-anchor='middle' font-size='14' fill='white' font-weight='bold'%3ERect 1%3C/text%3E%3Cpolygon points='480,40 420,160 540,160' fill='%234CAF50'/%3E%3Ctext x='480' y='125' text-anchor='middle' font-size='14' fill='white' font-weight='bold'%3ETriangle%3C/text%3E%3Crect x='80' y='200' width='140' height='100' fill='%23FF9800'/%3E%3Ctext x='150' y='255' text-anchor='middle' font-size='14' fill='white' font-weight='bold'%3ERect 2%3C/text%3E%3Ccircle cx='400' cy='250' r='70' fill='%239C27B0'/%3E%3Ctext x='400' y='255' text-anchor='middle' font-size='14' fill='white' font-weight='bold'%3ECircle 2%3C/text%3E%3C/svg%3E"
+        alt="Mixed Map Demo"
+        usemap="#mixedMap"
+      />
+
+      <map name="mixedMap">
+        <!-- Circle 1 - Pink -->
+        <area
+          shape="circle"
+          coords="100,100,60"
+          href="#"
+          alt="Pink Circle"
+          onclick="
+            showMessage(
+              'Pink Circle',
+              'You clicked on the PINK CIRCLE (Circle 1)!',
+            );
+            return false;
+          "
+        />
+        <!-- Rectangle 1 - Blue -->
+        <area
+          shape="rect"
+          coords="200,40,320,160"
+          href="#"
+          alt="Blue Rectangle"
+          onclick="
+            showMessage(
+              'Blue Rectangle',
+              'You clicked on the BLUE RECTANGLE (Rect 1)!',
+            );
+            return false;
+          "
+        />
+        <!-- Triangle - Green Polygon -->
+        <area
+          shape="poly"
+          coords="480,40,420,160,540,160"
+          href="#"
+          alt="Green Triangle"
+          onclick="
+            showMessage(
+              'Green Triangle',
+              'You clicked on the GREEN TRIANGLE (Polygon)!',
+            );
+            return false;
+          "
+        />
+        <!-- Rectangle 2 - Orange -->
+        <area
+          shape="rect"
+          coords="80,200,220,300"
+          href="#"
+          alt="Orange Rectangle"
+          onclick="
+            showMessage(
+              'Orange Rectangle',
+              'You clicked on the ORANGE RECTANGLE (Rect 2)!',
+            );
+            return false;
+          "
+        />
+        <!-- Circle 2 - Purple -->
+        <area
+          shape="circle"
+          coords="400,250,70"
+          href="#"
+          alt="Purple Circle"
+          onclick="
+            showMessage(
+              'Purple Circle',
+              'You clicked on the PURPLE CIRCLE (Circle 2)!',
+            );
+            return false;
+          "
+        />
+      </map>
+
+      <div id="mixedResult" class="result"></div>
+    </div>
+
+    <!-- EXPLANATION SECTION -->
+    <div class="map-container">
+      <h2>📚 How Image Maps Work</h2>
+      <div class="info-box">
+        <h3>Image Map Structure:</h3>
+        <ol style="line-height: 2">
+          <li>
+            <strong>&lt;img&gt; tag</strong> with
+            <code>usemap="#mapname"</code> attribute
+          </li>
+          <li>
+            <strong>&lt;map&gt; tag</strong> with
+            <code>name="mapname"</code> attribute
+          </li>
+          <li>
+            <strong>&lt;area&gt; tags</strong> inside the map defining clickable
+            regions
+          </li>
+        </ol>
+      </div>
+
+      <div class="info-box">
+        <h3>Shape Types:</h3>
+        <ul style="line-height: 2">
+          <li><code>shape="circle"</code> - Circular regions</li>
+          <li><code>shape="rect"</code> - Rectangular regions</li>
+          <li>
+            <code>shape="poly"</code> - Polygon regions (any number of sides)
+          </li>
+          <li>
+            <code>shape="default"</code> - Entire remaining area (not shown in
+            demo)
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Use Cases:</h3>
+        <ul style="line-height: 2">
+          <li>Interactive diagrams and infographics</li>
+          <li>Geographic maps with clickable regions</li>
+          <li>Dashboard navigation</li>
+          <li>Product showcases with clickable features</li>
+          <li>Educational materials and tutorials</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      function showMessage(title, message) {
+        // Determine which result div to use based on the shape type
+        var resultDiv;
+
+        if (
+          title.includes("Red Circle") ||
+          title.includes("Green Circle") ||
+          title.includes("Yellow Circle")
+        ) {
+          resultDiv = document.getElementById("circleResult");
+        } else if (
+          title.includes("Purple Rectangle") ||
+          title.includes("Red Rectangle") ||
+          title.includes("Blue Rectangle")
+        ) {
+          resultDiv = document.getElementById("rectResult");
+        } else if (
+          title.includes("Triangle") ||
+          title.includes("Pentagon") ||
+          title.includes("Star")
+        ) {
+          resultDiv = document.getElementById("polyResult");
+        } else {
+          resultDiv = document.getElementById("mixedResult");
+        }
+
+        // Display the message
+        resultDiv.innerHTML = "<strong>" + title + "</strong><br>" + message;
+        resultDiv.className = "result show";
+
+        // Add a smooth scroll to the result
+        resultDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+        // Auto-hide after 5 seconds
+        setTimeout(function () {
+          resultDiv.className = "result";
+        }, 5000);
+      }
+
+      // Log to console when page loads
+      console.log("Image Maps Demo loaded successfully!");
+      console.log(
+        "Try clicking on the different colored regions in each image.",
+      );
+    </script>
+  </body>
+</html>

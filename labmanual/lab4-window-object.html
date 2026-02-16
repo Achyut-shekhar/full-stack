@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Window Object Functions</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+
+      h1 {
+        color: blue;
+        text-align: center;
+      }
+
+      h2 {
+        color: green;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 5px;
+        cursor: pointer;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Window Object Functions in JavaScript</h1>
+
+    <h2>1. alert()</h2>
+    <p>Displays a message in a dialog box.</p>
+    <button onclick="demoAlert()">Try alert()</button>
+
+    <hr />
+
+    <h2>2. confirm()</h2>
+    <p>Displays a dialog box with OK and Cancel buttons.</p>
+    <button onclick="demoConfirm()">Try confirm()</button>
+
+    <hr />
+
+    <h2>3. prompt()</h2>
+    <p>Asks the user to enter some text.</p>
+    <button onclick="demoPrompt()">Try prompt()</button>
+
+    <hr />
+
+    <h2>4. open()</h2>
+    <p>Opens a new browser window.</p>
+    <button onclick="demoOpen()">Try open()</button>
+
+    <hr />
+
+    <h2>5. setTimeout()</h2>
+    <p>Executes a function after waiting for some time.</p>
+    <button onclick="demoSetTimeout()">Try setTimeout()</button>
+
+    <hr />
+
+    <h2>6. print()</h2>
+    <p>Opens the print dialog.</p>
+    <button onclick="demoPrint()">Try print()</button>
+
+    <script>
+      function demoAlert() {
+        alert("This is an alert message!");
+      }
+
+      function demoConfirm() {
+        var result = confirm("Do you want to continue?");
+        if (result) {
+          alert("You clicked OK!");
+        } else {
+          alert("You clicked Cancel!");
+        }
+      }
+
+      function demoPrompt() {
+        var name = prompt("Enter your name:");
+        if (name != null) {
+          alert("Hello " + name + "!");
+        }
+      }
+
+      function demoOpen() {
+        window.open("https://www.google.com");
+      }
+
+      function demoSetTimeout() {
+        alert("Wait for 2 seconds...");
+        setTimeout(function () {
+          alert("2 seconds have passed!");
+        }, 2000);
+      }
+
+      function demoPrint() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>
