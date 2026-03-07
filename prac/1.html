@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>practice 1</title>
+  </head>
+  <style>
+    #change{
+      background-color: blue; color:white;padding:10px;margin:10px;border-radius:10px
+    }
+    #change:hover{
+      background-color: green;
+    }
+    
+  </style>
+  <body style="display:flex; justify-content: center; align-items: center; flex-direction: column;">
+       <h1 id="title" style="color: red;">welcome</h1>
+       <p style="color: blue;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae quod eligendi atque doloremque voluptatibus minima ducimus exercitationem dolores ad ut ullam unde sequi eos asperiores, dolore in incidunt, maiores iure!</p>
+<div class="box" style="width: 50vw; background-color:aqua;  border: 1px solid black; padding:10px ;margin:20px;text-align:center">helllo this is the box</div>
+<button id="change" onclick="changetext()">changing color</button>
+<p id="changetxt">hello this is original</p>
+  </body>
+  <script>
+   let isChanged = false;
+
+function changetext(){
+    const element = document.getElementById('changetxt');
+    
+    if(isChanged){
+        element.innerHTML = "hello this is original";
+        isChanged = false;
+    } else {
+        element.innerHTML = "new text";
+        isChanged = true;
+    }
+}
+  </script>
+</html>
