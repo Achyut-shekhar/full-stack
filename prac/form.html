@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Form Practice</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h2 {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+      }
+      section {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 30px;
+      }
+      label {
+        display: inline-block;
+        width: 100px;
+        margin: 5px 0;
+      }
+      input,
+      select,
+      textarea {
+        margin: 5px 0;
+        padding: 5px;
+      }
+      button {
+        padding: 8px 16px;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+      .output {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. Basic Form Creation -->
+    <section>
+      <h2>1. Basic Form</h2>
+      <form action="#">
+        <label for="name">name:</label>
+        <input type="text" />
+        <br />
+        <label for="name">email:</label>
+        <input type="email" />
+        <br />
+        <label for="name">password:</label>
+        <input type="password" />
+        <br />
+        <!-- see two input with same name to reate radio -->
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="Male" /> Male
+        <input type="radio" name="gender" value="Female" /> Female
+        <br>
+        <label for="">Hobbies</label> 
+        <input type="checkbox" name="hobbie">football   
+        <input type="checkbox" name="hobbie">singing
+        <input type="checkbox" name="hobbie">art
+        <br>
+
+        <!-- dropdown -->
+        <label for="">city</label>
+        <select name="city" id="">
+          <option value="delhi">delhi</option>
+          <option value="goa">goa</option>
+          <option value="mumbai">mumbai</option>
+        </select>
+      </form>
+    </section>
+
+    <!-- 2. Form Validation -->
+    <section>
+      <h2>2. Form Validation</h2>
+      <form onsubmit="return validateForm();">
+        <label>Name:</label>
+        <input type="text" id="valName" /><br />
+
+        <label>Email:</label>
+        <input type="email" id="valEmail" /><br />
+
+        <label>Password:</label>
+        <input type="password" id="valPassword" /><br />
+
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- 3. Display Form Data -->
+    <section>
+      <h2>3. Display Form Data</h2>
+      <form
+        onsubmit="
+          displayData();
+          return false;
+        "
+      >
+        <label>Name:</label>
+        <input type="text" id="dispName" /><br />
+
+        <label>Age:</label>
+        <input type="number" id="dispAge" /><br />
+
+        <label>City:</label>
+        <input type="text" id="dispCity" /><br />
+
+        <button type="submit">Submit</button>
+      </form>
+      <p id="displayOutput" class="output"></p>
+    </section>
+
+    <!-- 4. Change Background Color -->
+    <section>
+      <h2>4. Change Background Color</h2>
+      <label>Pick a color:</label>
+      <select onchange="document.body.style.backgroundColor = this.value">
+        <option value="">-- Select --</option>
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+        <option value="Green">Green</option>
+        <option value="Yellow">Yellow</option>
+      </select>
+    </section>
+
+    <!-- 5. Login Form -->
+    <section>
+      <h2>5. Login Form</h2>
+      <form
+        onsubmit="
+          checkLogin();
+          return false;
+        "
+      >
+        <label>Username:</label>
+        <input type="text" id="loginUser" /><br />
+
+        <label>Password:</label>
+        <input type="password" id="loginPass" /><br />
+
+        <button type="submit">Login</button>
+      </form>
+      <p id="loginResult" class="output"></p>
+    </section>
+
+    <!-- 6. Age Validation -->
+    <section>
+      <h2>6. Age Validation</h2>
+      <form
+        onsubmit="
+          checkAge();
+          return false;
+        "
+      >
+        <label>Name:</label>
+        <input type="text" id="ageName" /><br />
+
+        <label>Age:</label>
+        <input type="number" id="ageValue" /><br />
+
+        <button type="submit">Submit</button>
+      </form>
+      <p id="ageResult" class="output"></p>
+    </section>
+
+    <!-- 7. Character Counter -->
+    <section>
+      <h2>7. Character Counter</h2>
+      <textarea
+        id="charArea"
+        rows="5"
+        cols="40"
+        onkeyup="countChars()"
+      ></textarea>
+      <p id="charCount">Characters: 0</p>
+    </section>
+
+    <!-- 8. Password Show/Hide -->
+    <section>
+      <h2>8. Password Show/Hide</h2>
+      <label>Password:</label>
+      <input type="password" id="togglePass" /><br />
+      <input type="checkbox" onchange="togglePassword()" /> Show Password
+    </section>
+
+    <script>
+      // 2. Form Validation
+      function validateForm() {
+        var name = document.getElementById("valName").value;
+        var password = document.getElementById("valPassword").value;
+
+        if (name === "") {
+          alert("Name cannot be empty");
+          return false;
+        }
+        if (password.length < 6) {
+          alert("Password must be at least 6 characters");
+          return false;
+        }
+        alert("Form submitted successfully!");
+        return true;
+      }
+
+      // 3. Display Form Data
+      function displayData() {
+        var name = document.getElementById("dispName").value;
+        var age = document.getElementById("dispAge").value;
+        var city = document.getElementById("dispCity").value;
+
+        document.getElementById("displayOutput").innerHTML =
+          "Name: " + name + "<br>Age: " + age + "<br>City: " + city;
+      }
+
+      // 5. Login Form
+      function checkLogin() {
+        var username = document.getElementById("loginUser").value;
+        var password = document.getElementById("loginPass").value;
+
+        if (username === "admin" && password === "1234") {
+          document.getElementById("loginResult").innerText = "Login Successful";
+        } else {
+          document.getElementById("loginResult").innerText = "Invalid Login";
+        }
+      }
+
+      // 6. Age Validation
+      function checkAge() {
+        var age = parseInt(document.getElementById("ageValue").value);
+
+        if (age < 18) {
+          document.getElementById("ageResult").innerText =
+            "You are not eligible";
+        } else {
+          document.getElementById("ageResult").innerText = "You are eligible";
+        }
+      }
+
+      // 7. Character Counter
+      function countChars() {
+        var len = document.getElementById("charArea").value.length;
+        document.getElementById("charCount").innerText = "Characters: " + len;
+      }
+
+      // 8. Password Show/Hide
+      function togglePassword() {
+        var passField = document.getElementById("togglePass");
+        if (passField.type === "password") {
+          passField.type = "text";
+        } else {
+          passField.type = "password";
+        }
+      }
+    </script>
+  </body>
+</html>
