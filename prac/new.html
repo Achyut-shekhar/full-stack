@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Number Sorter</title>
+  </head>
+  <body style="text-align: center; padding: 20px">
+    <h1>Add Numbers in Order</h1>
+
+    <input type="number" id="numberInput" placeholder="Enter a number" />
+    <button onclick="addNumber()">Add Number</button>
+    <button onclick="clearNumbers()">Clear All</button>
+
+    <h2>Numbers in Order:</h2>
+    <p id="display" style="font-size: 20px; color: blue">No numbers yet</p>
+
+    <script>
+      let numbers = [];
+
+      function addNumber() {
+        const input = document.getElementById("numberInput");
+        const num = parseFloat(input.value);
+
+        if (input.value === "" || isNaN(num)) {
+          alert("Please enter a valid number");
+          return;
+        }
+
+        numbers.push(num);
+        numbers.sort((a, b) => a - b);
+
+        document.getElementById("display").innerHTML = numbers.join(", ");
+        input.value = "";
+      }
+
+      function clearNumbers() {
+        numbers = [];
+        document.getElementById("display").innerHTML = "No numbers yet";
+      }
+    </script>
+  </body>
+</html>

@@ -14,6 +14,15 @@
     #change:hover {
       background-color: green;
     }
+    #my {
+     
+      width: 20vw;
+      height: 20vh;
+    }
+    #my:hover {
+       width: 50vw;
+      height: 50vh;
+    }
   </style>
   <body
     style="
@@ -45,8 +54,122 @@
     </div>
     <button id="change" onclick="changetext()">changing color</button>
     <p id="changetxt">hello this is original</p>
+    <section style="border: 1px solid black; padding: 10px">
+      <form action="">
+        <label for="">name:</label>
+        <input
+          type="text"
+          required
+          style="display: inline-block; width: 100px; margin: 5px 0"
+        />
+        <br /><br />
+
+        <label for="">email:</label>
+        <input
+          type="email"
+          required
+          style="display: inline-block; width: 100px; margin: 5px 0"
+        />
+        <br /><br />
+        <label for="">password:</label>
+        <input
+          type="password"
+          required
+          style="display: inline-block; width: 100px; margin: 5px 0"
+          id="passw"
+        />
+        <input type="checkbox" onchange="show()" />Show password
+        <br />
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+          "
+        >
+          <button
+            style="
+              background-color: rgb(118, 229, 229);
+              color: white;
+              border-radius: 10px;
+              border: 1px solid white;
+            "
+          >
+            submit
+          </button>
+        </div>
+      </form>
+    </section>
+   
+    <section style="text-align: center">
+      <p style="margin: 20px 20px">table</p>
+      <table border="1px" cellpadding="10" cellspacing="5" style="margin: 20px">
+        <thead>
+          <tr>
+            <th>heading</th>
+            <th>subject</th>
+            <th>marks</th>
+            <th>grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th rowspan="2" colspan="1">details</th>
+            <td>sdvdsv</td>
+            <td>dvdsv</td>
+            <td>sdsfvg</td>
+          </tr>
+          <tr>
+            <td>dvds</td>
+            <td>vszvzs</td>
+            <td>sdvsvf</td>
+          </tr>
+        </tbody>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <label for="">string:</label>
+      <input type="text" id="str1" />
+      <br />
+      <label for="">Substring:</label>
+      <input type="text" id="str2" />
+      <br />
+      <button onclick="check()">Check string</button>
+      <p id="output"></p>
+    </section>
+
+    <section>
+      <img src="image.jpg" alt="new" id="my" />
+    </section>
   </body>
+
   <script>
+    function check() {
+      let st1 = document.getElementById("str1").value;
+      let st2 = document.getElementById("str2").value;
+      let out = document.getElementById("output");
+
+      if (st1 === st2) {
+        out.innerHTML = "same";
+      } else {
+        out.innerHTML = "not same";
+      }
+    }
+    let ischanged = false;
+    function show() {
+      const pass = document.getElementById("passw");
+      if (ischanged) {
+        pass.type = "password";
+        ischanged = false;
+      } else {
+        pass.type = "text";
+        ischanged = true;
+      }
+    }
+
     let isChanged = false;
 
     function changetext() {
