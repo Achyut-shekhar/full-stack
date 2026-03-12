@@ -44,35 +44,43 @@
     <!-- 1. Basic Form Creation -->
     <section>
       <h2>1. Basic Form</h2>
-      <form action="#">
-        <label for="name">name:</label>
-        <input type="text" />
+      <form
+        onsubmit="
+          showBasicData();
+          return false;
+        "
+      >
+        <label for="basicName">name:</label>
+        <input type="text" id="basicName" />
         <br />
-        <label for="name">email:</label>
-        <input type="email" />
+        <label for="basicEmail">email:</label>
+        <input type="email" id="basicEmail" />
         <br />
-        <label for="name">password:</label>
-        <input type="password" />
+        <label for="basicPass">password:</label>
+        <input type="password" id="basicPass" />
         <br />
         <!-- see two input with same name to reate radio -->
         <label>Gender:</label>
         <input type="radio" name="gender" value="Male" /> Male
         <input type="radio" name="gender" value="Female" /> Female
-        <br>
-        <label for="">Hobbies</label> 
-        <input type="checkbox" name="hobbie">football   
-        <input type="checkbox" name="hobbie">singing
-        <input type="checkbox" name="hobbie">art
-        <br>
+        <br />
+        <label for="">Hobbies</label>
+        <input type="checkbox" name="hobbie" value="football" />football
+        <input type="checkbox" name="hobbie" value="singing" />singing
+        <input type="checkbox" name="hobbie" value="art" />art
+        <br />
 
         <!-- dropdown -->
-        <label for="">city</label>
-        <select name="city" id="">
+        <label for="basicCity">city</label>
+        <select name="city" id="basicCity">
           <option value="delhi">delhi</option>
           <option value="goa">goa</option>
           <option value="mumbai">mumbai</option>
         </select>
+        <br />
+        <button type="submit">Submit</button>
       </form>
+      <p id="basicOutput" class="output"></p>
     </section>
 
     <!-- 2. Form Validation -->
@@ -189,6 +197,44 @@
     </section>
 
     <script>
+      // 1. Basic Form
+      function showBasicData() {
+        var name = document.getElementById("basicName").value;
+        var email = document.getElementById("basicEmail").value;
+        var city = document.getElementById("basicCity").value;
+
+        var gender = "";
+        var radios = document.getElementsByName("gender");
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked) {
+            gender = radios[i].value;
+            break;
+          }
+        }
+
+        var hobbies = [];
+        var checkboxes = document.getElementsByName("hobbie");
+        for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) hobbies.push(checkboxes[i].value);
+        }
+
+        document.getElementById("basicOutput").innerHTML =
+          "Name: " +
+          name +
+          "<br>" +
+          "Email: " +
+          email +
+          "<br>" +
+          "Gender: " +
+          (gender || "Not selected") +
+          "<br>" +
+          "Hobbies: " +
+          (hobbies.length ? hobbies.join(", ") : "None") +
+          "<br>" +
+          "City: " +
+          city;
+      }
+
       // 2. Form Validation
       function validateForm() {
         var name = document.getElementById("valName").value;

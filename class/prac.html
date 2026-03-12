@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>mcq</title>
+    <style>
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #print-area,
+        #print-area * {
+          visibility: visible;
+        }
+        #print-area {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+        }
+        #export-btn {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>mcq question</h1>
+    <form action="" style="border: 1px solid black; justify-content:center;align-items:center; padding:10px; border-radius:10px">
+      <p>color of apple is __</p>
+      <input type="radio" name="q1" value="green" />green
+      <input type="radio" name="q1" value="red" />red
+      <br />
+      <p>color of banana is __</p>
+      <input type="radio" name="q2" value="yellow" />yellow
+      <input type="radio" name="q2" value="red" />red
+      <br />
+      <button type="button" onclick="check()" style=" margin-top:20px">Submit</button>
+      <br />
+      <div id="print-area">
+        <p id="result"></p>
+        <button id="export-btn" onclick="exportPDF()" style="display: none">
+          Export Score to PDF
+        </button>
+      </div>
+    </form>
+  </body>
+  <script>
+    function check() {
+      let score = 0;
+      let que1 = document.getElementsByName("q1");
+      let que2 = document.getElementsByName("q2");
+      let res = document.getElementById("result");
+
+      for (let i = 0; i < que1.length; i++) {
+        if (que1[i].checked && que1[i].value === "red") score++;
+      }
+      for (let i = 0; i < que2.length; i++) {
+        if (que2[i].checked && que2[i].value === "yellow") score++;
+      }
+
+      res.innerHTML = "Your score: " + score + " / 2";
+      document.getElementById("export-btn").style.display = "inline";
+    }
+
+    function exportPDF() {
+      window.print();
+    }
+  </script>
+</html>
