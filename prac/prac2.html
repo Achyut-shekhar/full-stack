@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <label for="in">input the string</label>
+    <input type="text" placeholder="10,2,3,4," id="in">
+    <button onclick="sub()">submit</button>
+    <br>
+    <p id="result">result</p>
+  </body>
+  <script>
+    function sub(){
+    let input=document.getElementById("in").value
+    let res=document.getElementById("result")
+
+    var arr=input.split(",");
+    console.log(arr)
+    var max=0;
+
+    for(let i=0;i<arr.length;i++){
+       if(Number(arr[i])>max)
+       {
+        max=arr[i];
+       }
+    }
+   res.innerHTML="max number is "+max
+  
+    }
+  </script>
+</html>
+
+<!-- function sub(){
+    let input = document.getElementById("in").value;
+    let arr = input.split(",").map(Number);
+    let max = Math.max(...arr);
+
+    document.getElementById("result").innerHTML = "Max number is " + max;
+} -->

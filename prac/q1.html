@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Q1 Login Validation</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f2f2f2;
+				padding: 30px;
+			}
+
+			.login-card {
+				max-width: 350px;
+				margin: 40px auto;
+				background-color: white;
+				padding: 20px;
+				border: 1px solid #ccc;
+			}
+
+			h1 {
+				font-size: 22px;
+				margin-top: 0;
+			}
+
+			label {
+				display: block;
+				margin-bottom: 5px;
+			}
+
+			.field {
+				margin-bottom: 12px;
+			}
+
+			input {
+				width: 100%;
+				padding: 8px;
+				border: 1px solid #999;
+				box-sizing: border-box;
+			}
+
+			input.empty::placeholder {
+				color: red;
+			}
+
+			button {
+				width: 100%;
+				padding: 9px;
+				border: none;
+				background-color: #2f7df6;
+				color: white;
+				cursor: pointer;
+			}
+
+			button:hover {
+				background-color: #1f5fc0;
+			}
+		</style>
+	</head>
+	<body>
+		<form class="login-card" onsubmit="return validateLogin();">
+			<h1>Login Form</h1>
+
+			<div class="field">
+				<label for="username">Username</label>
+				<input type="text" id="username" placeholder="Enter username" />
+			</div>
+
+			<div class="field">
+				<label for="password">Password</label>
+				<input
+					type="password"
+					id="password"
+					placeholder="Enter password (min 8 chars)"
+				/>
+			</div>
+
+			<button type="submit">Submit</button>
+		</form>
+
+		<script>
+			function validateLogin() {
+				var usernameField = document.getElementById("username");
+				var passwordField = document.getElementById("password");
+				var username = usernameField.value.trim();
+				var password = passwordField.value;
+
+				usernameField.classList.remove("empty");
+				passwordField.classList.remove("empty");
+
+				if (username === "" || password.length < 8) {
+					if (username === "") {
+						usernameField.classList.add("empty");
+					}
+
+					if (password.length < 8) {
+						passwordField.classList.add("empty");
+					}
+
+					alert("Login Failed");
+					return false;
+				}
+
+				alert("Login Successful");
+				return true;
+			}
+		</script>
+	</body>
+</html>

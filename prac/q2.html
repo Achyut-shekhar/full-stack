@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q2 Longest Word Finder</title>
+
+  </head>
+  <body>
+    <div class="card">
+      <h1>Longest Word Finder</h1>
+      <label for="wordsInput">Enter words separated by commas:</label>
+      <input
+        type="text"
+        id="wordsInput"
+        placeholder="apple, elephant, cat, notebook"
+      />
+      <button onclick="findLongestWord()">Find Longest Word</button>
+      <p id="result">Result will appear here.</p>
+    </div>
+
+    <script>
+      function findLongestWord() {
+        var input = document.getElementById("wordsInput").value.trim();
+
+        if (input.trim() === "") {
+          document.getElementById("result").innerText =
+            "Please enter at least one word.";
+          return;
+        }
+
+        var wordsArray = input.split(",");
+        var longest = "";
+        console.log(wordsArray);
+
+        for (var i = 0; i < wordsArray.length; i++) {
+          var word = wordsArray[i].trim();
+          console.log(word)
+          if (word.length > longest.length) {
+            longest = word;
+          }
+        }
+
+        document.getElementById("result").innerText =
+          "Longest word is: " + longest;
+      }
+    </script>
+  </body>
+</html>

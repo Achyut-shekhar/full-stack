@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head> </head>
+  <style>
+    form.new {
+      border: 1px solid red;
+    }
+  </style>
+  <body>
+    <form action="" id="box" onsubmit="return validate(event);">
+      <label for="name">name: </label>
+      <input type="text" placeholder="name" id="name" />
+      <br />
+      <label for="email">email: </label>
+      <input type="text" placeholder="email" id="email" />
+      <br />
+      <label for="password">password: </label>
+      <input type="password" placeholder="password" id="password" />
+      <br />
+      <button type="submit">submit</button>
+    </form>
+  </body>
+  <script>
+    function validate(event) {
+      event.preventDefault();
+      let nam = document.getElementById("name").value;
+      let emai = document.getElementById("email").value;
+      let pass = document.getElementById("password").value.trim();
+      let box = document.getElementById("box");
+      let isValid = true;
+
+      box.classList.remove("new");
+
+      if (nam === "") {
+        box.classList.add("new");
+        isValid = false;
+      }
+      if (!(emai.includes("@") && emai.includes(".com"))) {
+        box.classList.add("new");
+        isValid = false;
+      }
+      if (pass.length < 6) {
+        box.classList.add("new");
+        isValid = false;
+      }
+
+      if (!isValid) {
+        alert("registration failed");
+        return false;
+      }
+
+      alert("registration successful");
+      return false;
+    }
+  </script>
+</html>

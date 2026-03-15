@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <label for="">input the string:</label>
+    <input type="text" placeholder="string" id="str" />
+    <p id="result"></p>
+    <button type="button" onclick="check()">button</button>
+  </body>
+  <script>
+    function check() {
+      let res = document.getElementById("result");
+      let inp = document.getElementById("str").value.trim();
+      let count = {};
+      let maxchar = "";
+      let maxcount = 0;
+      for (let i = 0; i < inp.length; i++) {
+        let ch = inp[i];
+
+        if (count[ch]) {
+          count[ch] += 1;
+        } else {
+          count[ch] = 1;
+        }
+
+        if (count[ch] > maxcount) {
+          maxcount = count[ch];
+          maxch = ch;
+        }
+      }
+      res.innerHTML =
+        "the character " + maxch + " appears " + maxcount + " times";
+    }
+  </script>
+</html>
