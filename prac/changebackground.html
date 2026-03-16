@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head> </head>
+  <body>
+    <h2>background change</h2>
+    <div id="box" width="50vw" height="50vh">change me</div>
+    <button onclick="change()">change background</button>
+  </body>
+  <script>
+    let i = 0;
+    function change() {
+      var colors = ["blue", "green", "yellow"];
+      document.getElementById("box").style.backgroundColor=colors[i];
+      i++;
+      if (i >= colors.length) {
+        i = 0;
+      }
+    }
+  </script>
+</html>
