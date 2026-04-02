@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 24px;
+      }
+
+      button {
+        padding: 8px 14px;
+        cursor: pointer;
+      }
+
+      #result {
+        margin-top: 12px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        width: fit-content;
+        min-width: 220px;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="loadData()">Load Message</button>
+    <button onclick="saveAsPDF()" id="pdfBtn" disabled>Save as PDF</button>
+    <button onclick="saveAsExcel()" id="excelBtn" disabled>
+      Save as Excel
+    </button>
+    <p id="result">Result will appear here</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+    <script>
+      var loadedMessage = "";
+
+      function loadData() {
+        var xhr = new XMLHttpRequest();
+
+        document.getElementById("result").innerHTML = "Loading...";
+        document.getElementById("pdfBtn").disabled = true;
+        document.getElementById("excelBtn").disabled = true;
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              loadedMessage = xhr.responseText;
+              document.getElementById("result").innerHTML = loadedMessage;
+              document.getElementById("pdfBtn").disabled = false;
+              document.getElementById("excelBtn").disabled = false;
+            } else {
+              loadedMessage = "";
+              document.getElementById("result").innerHTML =
+                "Failed to load data.";
+            }
+          }
+        };
+
+        xhr.open("GET", "data.txt", true);
+        xhr.send();
+      }
+
+      function saveAsPDF() {
+        if (!loadedMessage) {
+          alert("Please load the message first.");
+          return;
+        }
+
+        var jsPDF = window.jspdf.jsPDF;
+        var doc = new jsPDF();
+        doc.text(loadedMessage, 10, 20);
+        doc.save("message.pdf");
+      }
+
+      function saveAsExcel() {
+        if (!loadedMessage) {
+          alert("Please load the message first.");
+          return;
+        }
+
+        var workbook = XLSX.utils.book_new();
+        var worksheet = XLSX.utils.aoa_to_sheet([["Message"], [loadedMessage]]);
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
+        XLSX.writeFile(workbook, "message.xlsx");
+      }
+    </script>
+  </body>
+</html>
