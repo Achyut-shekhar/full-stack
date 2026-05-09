@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+     <p>click submit</p>     
+    <button onclick="loadData()">submit</button>
+    <p id="output"></p>
+</body>
+<!-- <script>
+  function loadData(){
+    let xhr=new XMLHttpRequest();
+
+    xhr.open("GET","data.txt",true);
+
+    xhr.onload=function(){
+      if(xhr.status==200){
+        document.getElementById("output").innerHTML=xhr.responseText;
+      }
+    }
+    xhr.send();
+  } -->
+
+  <script>
+    function loadData(){
+      fetch("data.txt")
+      .then(response=>response.text())
+      .then(data=>{
+        document.getElementById("output").innerHTML=data;
+      })
+    }
+</script>
+</html>
